@@ -14,8 +14,7 @@
         "spa-app": "spasdk/app",
         "spa-develop": "spasdk/develop",
         "spa-gulp": "spasdk/gulp",
-        "spa-keys": "spasdk/keys",
-        "spa-router": "spasdk/router"
+        "spa-keys": "spasdk/keys"
     },
     "keywords": [
         "spa",
