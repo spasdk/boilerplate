@@ -8,4 +8,4 @@
 'use strict';
 
 // use all default SPA tasks
-require('spa-gulp');
+var gulp = require('spa-gulp');
