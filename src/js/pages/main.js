@@ -7,7 +7,7 @@
 
 'use strict';
 
-var Page = require('spa-page'),
+var Page = require('spa-component-page'),
     page = new Page({$node: window.pageMain});
 
 
