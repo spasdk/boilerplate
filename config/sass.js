@@ -13,6 +13,9 @@ module.exports = {
 
     // config for sass:develop task
     develop: {
+        // intended location of the output file
+        outFile: 'develop.css',
+
         // whether to use space or tab character for indentation
         indentType: 'space',
 
@@ -43,6 +46,9 @@ module.exports = {
 
     // config for sass:release task
     release: {
+        // intended location of the output file
+        outFile: 'release.css',
+
         // whether to use space or tab character for indentation
         indentType: 'space',
 
