@@ -11,6 +11,10 @@ module.exports = {
     // turn on/off translation
     active: true,
 
+    // directory to store css files
+    // default: <project root>/app/css/
+    path: 'css',
+
     // config for sass:develop task
     develop: {
         // intended location of the output file
