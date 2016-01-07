@@ -33,10 +33,8 @@ module.exports = {
         sourceComments: false,
 
         // the writing location for the source map file
-        sourceMap: 'develop.map',
-
-        // includes the contents in the source map information
-        sourceMapContents: true
+        // options: file name, true - inline source map, false - disable
+        sourceMap: 'develop.map'
     },
 
     // config for sass:release task
@@ -61,9 +59,7 @@ module.exports = {
         sourceComments: false,
 
         // the writing location for the source map file
-        sourceMap: false,
-
-        // includes the contents in the source map information
-        sourceMapContents: false
+        // options: file name, true - inline source map, false - disable
+        sourceMap: false
     }
 };
