@@ -1,83 +1,73 @@
 /**
- * SASS configuration for sass gulp task.
- *
- * @see https://github.com/sass/node-sass
+ * Configuration for sass gulp task.
  */
 
 'use strict';
 
 // public
 module.exports = {
-    // turn on/off translation
+    // turn on/off compilation
     active: true,
 
-    // directory to store css files
-    // default: <project root>/app/css/
-    path: 'css',
+    // set of named configs for corresponding gulp tasks
+    // e.g. profile "develop" will inherit all options from "default"
+    // and create gulp task "sass:develop"
+    profiles: {
+        // config to be extended by other profiles
+        default: {
+            // directory to look for source files
+            // default: <project root>/src/sass
+            srcPath: 'sass',
 
-    // config for sass:develop task
-    develop: {
-        // intended location of the output file
-        outFile: 'develop.css',
+            // main source entry point
+            srcFile: 'main.scss',
 
-        // whether to use space or tab character for indentation
-        indentType: 'space',
+            // directory to store output files
+            // default: <project root>/app/css
+            outPath: 'css',
 
-        // the number of spaces or tabs to be used for indentation
-        indentWidth: 4,
+            // whether to use space or tab character for indentation
+            indentType: 'space',
 
-        // whether to use cr, crlf, lf or lfcr sequence for line break
-        linefeed: 'lf',
+            // the number of spaces or tabs to be used for indentation
+            indentWidth: 4,
 
-        // output format of the final CSS style
-        // options: nested, expanded, compact, compressed
-        outputStyle: 'nested',
+            // whether to use cr, crlf, lf or lfcr sequence for line break
+            linefeed: 'lf',
 
-        // how many digits after the decimal will be allowed
-        precision: 2,
+            // how many digits after the decimal will be allowed
+            precision: 2
+        },
 
-        // additional debugging information in the output file as CSS comments
-        sourceComments: false,
+        // config for sass:develop task
+        develop: {
+            // intended output file name
+            outFile: 'develop.css',
 
-        // the writing location for the source map file
-        // options: file name, true - inline source map, false - disable
-        sourceMap: 'develop.map',
+            // output format of the final CSS style
+            // options: nested, expanded, compact, compressed
+            outputStyle: 'nested',
 
-        // whether to include the source files content in the source map
-        // bigger map file but no need to serve source scss files
-        sourceMapContents: false
-    },
+            // additional debugging information in the output file as CSS comments
+            sourceComments: false,
 
-    // config for sass:release task
-    release: {
-        // intended location of the output file
-        outFile: 'release.css',
+            // the writing location for the source map file
+            // options: file name, true - inline source map, false - disable
+            sourceMap: 'develop.map',
 
-        // whether to use space or tab character for indentation
-        indentType: 'space',
+            // whether to include the source files content in the source map
+            // bigger map file but no need to serve source scss files
+            sourceMapContents: false
+        },
 
-        // the number of spaces or tabs to be used for indentation
-        indentWidth: 4,
+        // config for sass:release task
+        release: {
+            // intended output file name
+            outFile: 'release.css',
 
-        // whether to use cr, crlf, lf or lfcr sequence for line break
-        linefeed: 'lf',
-
-        // output format of the final CSS style
-        // options: nested, expanded, compact, compressed
-        outputStyle: 'compressed',
-
-        // how many digits after the decimal will be allowed
-        precision: 2,
-
-        // additional debugging information in the output file as CSS comments
-        sourceComments: false,
-
-        // the writing location for the source map file
-        // options: file name, true - inline source map, false - disable
-        sourceMap: false,
-
-        // whether to include the source files content in the source map
-        // bigger map file but no need to serve source scss files
-        sourceMapContents: false
+            // output format of the final CSS style
+            // options: nested, expanded, compact, compressed
+            outputStyle: 'compressed'
+        }
     }
 };
