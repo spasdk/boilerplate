@@ -15,6 +15,7 @@
         "spa-component-page": "spasdk/component-page",
         "spa-develop": "spasdk/develop",
         "spa-gulp": "spasdk/gulp",
+        "spa-gulp-jade": "spasdk/gulp-jade",
         "spa-keys": "spasdk/keys"
     },
     "keywords": [
