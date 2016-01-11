@@ -18,7 +18,9 @@ module.exports = {
             },
             develop: {
                 targetFile: 'debug.html'
-            }
+            },
+            release: false,
+            test: {}
         }
     },
     sass: {
@@ -27,10 +29,12 @@ module.exports = {
 };
 ```
 
-This will add the following changes:
+This will apply the following changes:
 
 * set `pug` as the directory to look for source files (instead of default `jade`) for all Jade profiles
 * set `debug.html` as  the intended output file name (instead of default `develop.html`) for Jade `develop` profile only
+* remove Jade `release` profile
+* add new Jade `test` profile filled with options from `default` profile
 * completely disable all SASS tasks
 
 
