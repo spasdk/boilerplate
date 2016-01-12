@@ -15,7 +15,7 @@ module.exports = {
     // default: <project root>/app/js/
     path: 'js',
 
-    // config for webpack:develop task
+    // config for webpack:build:develop task
     develop: {
         // intended output file name
         targetFile: 'develop.js',
@@ -48,7 +48,7 @@ module.exports = {
         //sourceMapContents: false
     },
 
-    // config for webpack:release task
+    // config for webpack:build:release task
     release: {
         // intended output file name
         targetFile: 'release.js',
