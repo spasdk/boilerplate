@@ -16,6 +16,7 @@
         "spa-develop": "1.*.*",
         "spa-gulp": "1.*.*",
         "spa-gulp-jade": "1.*.*",
+        "spa-gulp-lint": "1.*.*",
         "spa-gulp-sass": "1.*.*",
         "spa-keys": "1.*.*"
     },
