@@ -11,27 +11,31 @@ For example:
 
 ```js
 module.exports = {
-    jade: {
-        profiles: {
-            default: {
-                sourcePath: 'pug'
-            },
-            develop: {
-                targetFile: 'debug.html'
-            },
-            release: false,
-            test: {}
+    default: {
+        notifications: {
+            popup: {
+                error: false
+            }
         }
     },
-    sass: {
-        active: false
-    }
+    jade: {
+        default: {
+            sourcePath: 'src/pug'
+        },
+        develop: {
+            targetFile: 'debug.html'
+        },
+        release: false,
+        test: {}
+    },
+    sass: false
 };
 ```
 
 This will apply the following changes:
 
-* set `pug` as the directory to look for source files (instead of default `jade`) for all Jade profiles
+* disable error popup notifications for all profiles and all tasks
+* set `pug` as the directory to look for source files (instead of default `src/jade`) for all Jade profiles
 * set `debug.html` as  the intended output file name (instead of default `develop.html`) for Jade `develop` profile only
 * remove Jade `release` profile
 * add new Jade `test` profile filled with options from `default` profile
