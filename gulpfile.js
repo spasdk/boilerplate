@@ -1,5 +1,5 @@
 /**
- * Gulp main entry point.
+ * Gulp main entry point and tasks configurations.
  */
 
 'use strict';
