@@ -4,9 +4,9 @@
 
 'use strict';
 
-// load SPA gulp modules
-require('spa-gulp');
-
 // tasks configurations
 // to overwrite defaults
 module.exports = {};
+
+// load SPA gulp modules
+require('spa-gulp');
