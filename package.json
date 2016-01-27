@@ -22,7 +22,6 @@
         "spa-keys": "1.*.*"
     },
     "devDependencies": {
-        "spa-develop": "1.*.*",
         "spa-gulp-eslint": "1.*.*",
         "spa-gulp-livereload": "1.*.*",
         "spa-gulp-repl": "1.*.*",
