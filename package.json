@@ -12,14 +12,16 @@
     },
     "dependencies": {
         "spa-app": "1.*.*",
+        "spa-keys": "1.*.*",
+
         "spa-component-page": "1.*.*",
+
         "spa-gulp": "1.*.*",
         "spa-gulp-gettext": "1.*.*",
         "spa-gulp-jade": "1.*.*",
         "spa-gulp-sass": "1.*.*",
         "spa-gulp-webpack": "1.*.*",
-        "spa-gulp-zip": "1.*.*",
-        "spa-keys": "1.*.*"
+        "spa-gulp-zip": "1.*.*"
     },
     "devDependencies": {
         "spa-gulp-eslint": "1.*.*",
