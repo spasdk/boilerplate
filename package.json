@@ -11,23 +11,23 @@
         "lint": "eslint *.js"
     },
     "dependencies": {
-        "spa-app": "1.*.*",
-        "spa-keys": "1.*.*",
+        "spa-app": "spasdk/app",
+        "spa-keys": "spasdk/keys",
 
-        "spa-component-page": "1.*.*",
+        "spa-component-page": "spasdk/component-page",
 
-        "spa-gulp": "1.*.*",
-        "spa-gulp-gettext": "1.*.*",
-        "spa-gulp-jade": "1.*.*",
-        "spa-gulp-sass": "1.*.*",
-        "spa-gulp-webpack": "1.*.*",
-        "spa-gulp-zip": "1.*.*"
+        "spa-gulp": "spasdk/gulp",
+        "spa-gulp-gettext": "spasdk/gulp-gettext",
+        "spa-gulp-jade": "spasdk/gulp-jade",
+        "spa-gulp-sass": "spasdk/gulp-sass",
+        "spa-gulp-webpack": "spasdk/gulp-webpack",
+        "spa-gulp-zip": "spasdk/gulp-zip"
     },
     "devDependencies": {
-        "spa-gulp-eslint": "1.*.*",
-        "spa-gulp-livereload": "1.*.*",
-        "spa-gulp-repl": "1.*.*",
-        "spa-gulp-static": "1.*.*"
+        "spa-gulp-eslint": "spasdk/gulp-eslint",
+        "spa-gulp-livereload": "spasdk/gulp-livereload",
+        "spa-gulp-repl": "spasdk/gulp-repl",
+        "spa-gulp-static": "spasdk/gulp-static"
     },
     "license": "GPL-3.0"
 }
