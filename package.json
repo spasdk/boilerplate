@@ -8,7 +8,7 @@
     },
     "repository": "spasdk/boilerplate",
     "scripts": {
-        "start": "spa-system",
+        "start": "spasdk",
         "lint": "eslint *.js"
     },
     "dependencies": {
