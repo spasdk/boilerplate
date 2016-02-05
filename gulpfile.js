@@ -9,4 +9,4 @@
 module.exports = {};
 
 // load SPA gulp modules
-require('spa-gulp');
+//require('spa-gulp');
