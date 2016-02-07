@@ -8,8 +8,8 @@
     },
     "repository": "spasdk/boilerplate",
     "scripts": {
-        "start": "spasdk wamp:serve:default",
-        "debug": "DEBUG=* spasdk wamp:serve:default",
+        "start": "spasdk webpack:watch:develop static:serve:default wamp:serve:default webui:serve:default",
+        "debug": "DEBUG=* spasdk webpack:watch:develop static:serve:default wamp:serve:default webui:serve:default",
         "lint": "eslint *.js"
     },
     "dependencies": {
