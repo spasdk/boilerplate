@@ -9,7 +9,7 @@
     "repository": "spasdk/boilerplate",
     "scripts": {
         "start": "spasdk jade:watch:develop sass:watch:develop webpack:watch:develop static:serve:default wamp:serve:default webui:serve:default livereload:watch:default",
-        "debug": "DEBUG=* spasdk jade:watch:develop sass:watch:develop webpack:watch:develop static:serve:default wamp:serve:default webui:serve:default livereload:watch:default",
+        "build": "spasdk jade:build webpack:build sass:build",
         "lint": "eslint *.js"
     },
     "dependencies": {
