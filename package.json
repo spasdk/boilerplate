@@ -14,8 +14,6 @@
     },
     "dependencies": {
         "spa-app": "spasdk/app",
-        "spa-keys": "spasdk/keys",
-
         "spa-component-page": "spasdk/component-page"
     },
     "license": "GPL-3.0"
