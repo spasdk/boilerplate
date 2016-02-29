@@ -8,9 +8,10 @@
     },
     "repository": "spasdk/boilerplate",
     "scripts": {
-        "start": "spasdk default",
-        "build": "spasdk jade:build webpack:build sass:cache sass:build",
-        "lint": "eslint *.js"
+        "start": "spasdk",
+        "build": "spasdk build",
+        "watch": "spasdk watch",
+        "serve": "spasdk serve"
     },
     "dependencies": {
         "spa-app": "spasdk/app",
