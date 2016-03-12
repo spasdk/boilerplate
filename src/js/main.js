@@ -4,22 +4,24 @@
 
 'use strict';
 
-var app    = require('spa-app'),
-    router = require('spa-router');
+var app = require('spa-app');
 
 
-// all resources are loaded
-app.once('load', function () {
-    // set pages
-    router.init([
-        require('./pages/init'),
-        require('./pages/main')
-    ]);
+// DOM is ready
+app.once('dom', function () {
+    // load pages
+    app.pages = {
+        init: require('./pages/init'),
+        main: require('./pages/main')
+    };
+
+    // show splash screen
+    app.route(app.pages.init);
 });
 
 
 // everything is ready
-app.once('done', function () {
-    // go to the main page when necessary
-    router.navigate('pageMain');
+app.once('load', function () {
+    // show main page
+    app.route(app.pages.main);
 });
