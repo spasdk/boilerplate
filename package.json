@@ -18,5 +18,5 @@
         "spa-component-page": "spasdk/component-page",
         "spa-eslint-config": "spasdk/eslint-config"
     },
-    "license": "GPL-3.0"
+    "license": "MIT"
 }
