@@ -6,7 +6,10 @@
         "name": "Stanislav Kalashnik",
         "email": "darkpark.main@gmail.com"
     },
-    "repository": "spasdk/boilerplate",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/spasdk/boilerplate.git"
+    },
     "scripts": {
         "start": "spasdk",
         "build": "spasdk build",
