@@ -750,9 +750,9 @@
 
 /***/ },
 /* 3 */
-/*!*****************************************************!*\
-  !*** /home/dp/Projects/sdk/cjssdk/emitter/index.js ***!
-  \*****************************************************/
+/*!****************************************************!*\
+  !*** /home/dp/Projects/sdk/~/cjs-emitter/index.js ***!
+  \****************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__filename) {/**
@@ -1007,7 +1007,7 @@
 	// public
 	module.exports = Emitter;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, "../../cjssdk/emitter/index.js"))
+	/* WEBPACK VAR INJECTION */}.call(exports, "../../node_modules/cjs-emitter/index.js"))
 
 /***/ },
 /* 4 */
@@ -1774,6 +1774,9 @@
 	
 	
 	if ( app.query.wampPort ) {
+	    // correct type
+	    app.query.wampTargetId = parseInt(app.query.wampTargetId, 10);
+	
 	    app.develop.wamp = new Wamp(
 	        'ws://' + (app.query.wampHost || location.hostname) + ':' + app.query.wampPort + '/target/' + (app.query.wampTargetId || '')
 	    );
@@ -1784,7 +1787,7 @@
 	        // get target connection id
 	        app.develop.wamp.call('getConnectionInfo', {}, function ( error, data ) {
 	            // check if already linked
-	            if ( !error && parseInt(app.query.wampTargetId, 10) !== data.id ) {
+	            if ( !error && app.query.wampTargetId !== data.id ) {
 	                // disconnect
 	                app.develop.wamp.socket.close();
 	                // correct url
@@ -1810,9 +1813,9 @@
 
 /***/ },
 /* 10 */
-/*!************************!*\
-  !*** ../wamp/index.js ***!
-  \************************/
+/*!*************************************************!*\
+  !*** /home/dp/Projects/sdk/~/spa-wamp/index.js ***!
+  \*************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1897,9 +1900,9 @@
 
 /***/ },
 /* 11 */
-/*!**************************************************!*\
-  !*** /home/dp/Projects/sdk/cjssdk/wamp/index.js ***!
-  \**************************************************/
+/*!*************************************************!*\
+  !*** /home/dp/Projects/sdk/~/cjs-wamp/index.js ***!
+  \*************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2079,7 +2082,7 @@
 	
 	var //util    = require('util'),
 	    app      = __webpack_require__(/*! ../core */ 2),
-	    Wamp     = __webpack_require__(/*! spa-wamp */ 10),
+	    //Wamp     = require('spa-wamp'),
 	    //request  = require('spa-request'),
 	    gremlins = __webpack_require__(/*! gremlins.js/gremlins.min.js */ 13),
 	    events   = {};
@@ -3656,7 +3659,7 @@
 	
 	'use strict';
 	
-	var app     = __webpack_require__(/*! spa-app */ 1),
+	var app     = __webpack_require__(/*! spa-app/lib/core */ 2),
 	    Emitter = __webpack_require__(/*! cjs-emitter */ 3),
 	    counter = 0;
 	
