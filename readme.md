@@ -13,6 +13,15 @@ Create a new project base:
 git clone https://github.com/spasdk/boilerplate.git my-project
 ```
 
+Build and start services:
+
+```bash
+cd my-project
+spasdk
+# or
+DEBUG=* spasdk
+```
+
 
 ## Contribution ##
 
