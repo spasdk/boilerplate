@@ -4,9 +4,12 @@
 
 'use strict';
 
-// redefinition of plugin options example
+// redefinition of plugin option example
 // require('spa-plugin-static/config').develop.port = 8000;
 
 // load default plugins
 // and run default tasks
 module.exports = require('spasdk/default');
+
+// redefinition of default task example
+// module.exports.runner.task('default', module.exports.runner.serial('build'));
