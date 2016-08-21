@@ -750,9 +750,9 @@
 
 /***/ },
 /* 3 */
-/*!****************************************************!*\
-  !*** /home/dp/Projects/sdk/~/cjs-emitter/index.js ***!
-  \****************************************************/
+/*!*****************************************************!*\
+  !*** /home/dp/Projects/sdk/cjssdk/emitter/index.js ***!
+  \*****************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(__filename) {/**
@@ -1007,7 +1007,7 @@
 	// public
 	module.exports = Emitter;
 	
-	/* WEBPACK VAR INJECTION */}.call(exports, "../../node_modules/cjs-emitter/index.js"))
+	/* WEBPACK VAR INJECTION */}.call(exports, "../../cjssdk/emitter/index.js"))
 
 /***/ },
 /* 4 */
@@ -1566,11 +1566,14 @@
 		//
 	    // console.log('%c%s', 'color:' + (color || 'black'), message);
 	
+	    // sanitize
+	    config = config || {};
+	
 	    config.info = info;
 	    //config.data = data ? util.inspect(data, {depth: debug.config.depth}) : null;
 	    config.data = data !== undefined ? wrapData(data) : undefined;
 	    //config.data = wrapData(data);
-	    config.time = +new Date();
+	    config.time = Date.now();
 	    config.targetId = app.query.wampTargetId;
 	    //config.tags = config.tags.sort();
 	
@@ -1692,7 +1695,7 @@
 	 * // prints 'time (done): +60ms'
 	 */
 	debug.time = function ( name, title ) {
-	    var time = +new Date();
+	    var time = Date.now();
 	
 	    // sanitize
 	    name  = name  || '';
@@ -1732,7 +1735,7 @@
 	 * // prints 'request (done): 934ms'
 	 */
 	debug.timeEnd = function ( name, title ) {
-	    var time = +new Date();
+	    var time = Date.now();
 	
 	    // sanitize
 	    name  = name  || '';
@@ -1813,9 +1816,9 @@
 
 /***/ },
 /* 10 */
-/*!*************************************************!*\
-  !*** /home/dp/Projects/sdk/~/spa-wamp/index.js ***!
-  \*************************************************/
+/*!************************!*\
+  !*** ../wamp/index.js ***!
+  \************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -1900,9 +1903,9 @@
 
 /***/ },
 /* 11 */
-/*!*************************************************!*\
-  !*** /home/dp/Projects/sdk/~/cjs-wamp/index.js ***!
-  \*************************************************/
+/*!**************************************************!*\
+  !*** /home/dp/Projects/sdk/cjssdk/wamp/index.js ***!
+  \**************************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -2225,7 +2228,7 @@
 	            // get through all css links
 	            Array.prototype.slice.call(document.head.getElementsByTagName('link')).forEach(function forEachLink ( tag ) {
 	                // get base name, modify and apply
-	                tag.href = tag.href.split('?')[0] + '?' + (+new Date());
+	                tag.href = tag.href.split('?')[0] + '?' + Date.now();
 	            });
 	            break;
 	    }
