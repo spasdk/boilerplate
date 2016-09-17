@@ -15,7 +15,7 @@
         "build": "spasdk build",
         "watch": "spasdk watch",
         "serve": "spasdk serve",
-        "lint": "eslint 'src/**/*.js'",
+        "lint": "eslint .",
         "test": "npm run lint"
     },
     "dependencies": {
@@ -23,8 +23,8 @@
         "spa-component-page": "spasdk/component-page"
     },
     "devDependencies": {
-        "spa-eslint-config": "spasdk/eslint-config",
-        "eslint": "2.*.*"
+        "eslint": "2.*.*",
+        "spa-eslint-config": "spasdk/eslint-config"
     },
     "license": "MIT"
 }
