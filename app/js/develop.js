@@ -1236,6 +1236,10 @@
 	     */
 	    keydown: function ( event ) {
 	        var page = app.activePage,
+	            eventLocal = {
+	                code: event.keyCode,
+	                stop: false
+	            },
 	            activeComponent;
 	
 	        if ( true ) {
@@ -1249,12 +1253,13 @@
 	        //event.code = event.keyCode;
 	
 	        // apply key modifiers
-	        //if ( event.shiftKey ) { event.code += 1000; }
-	        //if ( event.altKey )   { event.code += 2000; }
+	        if ( event.ctrlKey )  { eventLocal.code += 'c'; }
+	        if ( event.altKey )   { eventLocal.code += 'a'; }
+	        if ( event.shiftKey ) { eventLocal.code += 's'; }
 	
 	        //debug.event(event);
 	        //console.log(event);
-	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
+	        //debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
 	
 	        // page.activeComponent can be set to null in event handles
 	        activeComponent = page.activeComponent;
@@ -1264,27 +1269,27 @@
 	            // component is available and not page itself
 	            if ( activeComponent.events[event.type] ) {
 	                // there are some listeners
-	                activeComponent.emit(event.type, event);
+	                activeComponent.emit(event.type, eventLocal, event);
 	            }
 	
 	            // todo: bubble event recursively
 	            // bubbling
 	            if (
-	                !event.stop &&
+	                !eventLocal.stop &&
 	                activeComponent.propagate &&
 	                activeComponent.parent &&
 	                activeComponent.parent.events[event.type]
 	            ) {
-	                activeComponent.parent.emit(event.type, event);
+	                activeComponent.parent.emit(event.type, eventLocal, event);
 	            }
 	        }
 	
 	        // page handler
-	        if ( !event.stop ) {
+	        if ( !eventLocal.stop ) {
 	            // not prevented
 	            if ( page.events[event.type] ) {
 	                // there are some listeners
-	                page.emit(event.type, event);
+	                page.emit(event.type, eventLocal, event);
 	            }
 	
 	            // global app handler
@@ -1292,7 +1297,7 @@
 	                // not prevented
 	                if ( app.events[event.type] ) {
 	                    // there are some listeners
-	                    app.emit(event.type, event);
+	                    app.emit(event.type, eventLocal, event);
 	                }
 	            }
 	        }
@@ -3594,7 +3599,7 @@
 	    config = config || {};
 	
 	    console.assert(typeof this === 'object', 'must be constructed via new');
-	    
+	
 	    if ( true ) {
 	        if ( typeof config !== 'object' ) { throw new Error(__filename + ': wrong config type'); }
 	        // init parameters checks
@@ -3618,7 +3623,7 @@
 	    this.activeComponent = null;
 	
 	    // set default className if classList property empty or undefined
-	    config.className = 'page ' + (config.className || '');
+	    //config.className = 'page ' + (config.className || '');
 	
 	    // parent constructor call
 	    Component.call(this, config);
@@ -3639,6 +3644,9 @@
 	// inheritance
 	Page.prototype = Object.create(Component.prototype);
 	Page.prototype.constructor = Page;
+	
+	// set component name
+	Page.prototype.name = 'spa-component-page';
 	
 	
 	// public
@@ -3786,7 +3794,8 @@
 	    this.$body = config.$body || this.$node;
 	
 	    // set CSS class names
-	    this.$node.className += ' component ' + (config.className || '');
+	    //this.$node.className += ' component ' + (config.className || '');
+	    this.$node.className = this.name + ' ' + (config.className || '');
 	
 	    // apply component id if given, generate otherwise
 	    this.id = config.id || this.$node.id || 'cid' + counter++;

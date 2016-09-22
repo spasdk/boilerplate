@@ -1,0 +1,40 @@
+/* spa-app: release */
+html, body {
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+    font-family: arial, sans-serif;
+    overflow: hidden;
+    margin: 0;
+    padding: 0; }
+
+table {
+    border: 0;
+    border-collapse: collapse;
+    border-spacing: 0; }
+    table td {
+        padding: 0; }
+
+.maxh {
+    height: 100%; }
+
+.maxw {
+    width: 100%; }
+
+a {
+    text-decoration: none; }
+
+.spa-component-page {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    visibility: hidden;
+    overflow: hidden; }
+    .spa-component-page.hidden {
+        display: none; }
+    .spa-component-page.active {
+        visibility: inherit; }
+
