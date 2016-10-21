@@ -19,7 +19,7 @@
         "test": "npm run lint"
     },
     "dependencies": {
-        "spa-app": "spasdk/app",
+        "spa-app": "1.*.*",
         "spa-component-page": "spasdk/component-page"
     },
     "devDependencies": {
