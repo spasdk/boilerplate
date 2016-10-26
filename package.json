@@ -20,7 +20,7 @@
     },
     "dependencies": {
         "spa-app": "1.*.*",
-        "spa-component-page": "spasdk/component-page"
+        "spa-component-page": "1.*.*"
     },
     "devDependencies": {
         "eslint": "3.*.*",
