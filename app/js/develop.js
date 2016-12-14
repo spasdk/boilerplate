@@ -50,12 +50,12 @@
 	/**
 	 * Main application entry point.
 	 */
-	
+
 	'use strict';
-	
+
 	var app = __webpack_require__(/*! spa-app */ 1);
-	
-	
+
+
 	// DOM is ready
 	app.once('dom', function () {
 	    // load pages
@@ -63,12 +63,12 @@
 	        init: __webpack_require__(/*! ./pages/init */ 17),
 	        main: __webpack_require__(/*! ./pages/main */ 20)
 	    };
-	
+
 	    // show splash screen
 	    app.route(app.pages.init);
 	});
-	
-	
+
+
 	// everything is ready
 	app.once('load', function () {
 	    // show main page
@@ -87,37 +87,37 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	/* eslint no-path-concat: 0 */
-	
+
 	'use strict';
-	
+
 	var //Emitter = require('cjs-emitter'),
 	    //router  = require('spa-router'),
 	    //parse   = require('cjs-query').parse,
 	    app    = __webpack_require__(/*! ./lib/core */ 2),
 	    events = __webpack_require__(/*! ./lib/events */ 6);
-	
-	
+
+
 	// early return
 	//module.exports = app;
-	
-	
+
+
 	// url request params
 	//app.query = parse(document.location.search.substring(1));
-	
-	
+
+
 	// activate development mechanisms and tools
 	if ( true ) {
 	    __webpack_require__(/*! ./lib/develop/main */ 7);
 	}
-	
-	
+
+
 	// global application configuration
 	// in config.js file in js root
 	//app.config = require('app:config');
-	
-	
+
+
 	/*app.data = {
 	    /!**
 	     * Timestamps data.
@@ -132,15 +132,15 @@
 	    //     load: 0,
 	    //     done: 0
 	    // }
-	
+
 	    // parameters from get request
 	    //query: parse(document.location.search.substring(1))
 	};*/
-	
-	
+
+
 	//app.activePage = null;
-	
-	
+
+
 	// /**
 	//  * Make the given inactive/hidden page active/visible.
 	//  * Pass some data to the page and trigger the corresponding event.
@@ -260,17 +260,17 @@
 	//     // nothing was done
 	//     return false;
 	// };
-	
+
 	//app.route = require('./lib/route');
-	
-	
+
+
 	/*app.defaultEvents = {
 	    DOMContentLoaded: function ( event ) {
 	        //debug.event(event);
 	        //console.log(event);
-	
+
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // there are some listeners
 	        if ( app.events['dom'] ) {
 	            // notify listeners
@@ -278,7 +278,7 @@
 	            //console.log('DOMContentLoaded');
 	        }
 	    },
-	
+
 	    /!**
 	     * The load event is fired when a resource and its dependent resources have finished loading.
 	     *
@@ -293,36 +293,36 @@
 	     *!/
 	    load: function ( event ) {
 	        //var path;
-	
+
 	        //debug.event(event);
 	        //console.log(event);
-	
+
 	        // time mark
 	        //app.data.time.load = event.timeStamp;
-	
+
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // global handler
 	        // there are some listeners
 	        if ( app.events[event.type] ) {
 	            // notify listeners
 	            app.emit(event.type, event);
 	        }
-	
+
 	        // local handler on each page
 	        /!*router.pages.forEach(function forEachPages ( page ) {
 	            debug.log('component ' + page.constructor.name + '.' + page.id + ' load', 'green');
-	
+
 	            // there are some listeners
 	            if ( page.events[event.type] ) {
 	                // notify listeners
 	                page.emit(event.type, event);
 	            }
 	        });*!/
-	
+
 	        // time mark
 	        //app.data.time.done = +new Date();
-	
+
 	        // everything is ready
 	        // and there are some listeners
 	        // if ( app.events['done'] ) {
@@ -330,7 +330,7 @@
 	        //     app.emit('done', event);
 	        // }
 	    },
-	
+
 	    /!**
 	     * The unload event is fired when the document or a child resource is being unloaded.
 	     *
@@ -345,20 +345,20 @@
 	    unload: function ( event ) {
 	        //debug.event(event);
 	        console.log(event);
-	
+
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // global handler
 	        // there are some listeners
 	        if ( app.events[event.type] ) {
 	            // notify listeners
 	            app.emit(event.type, event);
 	        }
-	
+
 	        // local handler on each page
 	        /!*router.pages.forEach(function forEachPages ( page ) {
 	            debug.log('component ' + page.constructor.name + '.' + page.id + ' unload', 'red');
-	
+
 	            // there are some listeners
 	            if ( page.events[event.type] ) {
 	                // notify listeners
@@ -366,7 +366,7 @@
 	            }
 	        });*!/
 	    },
-	
+
 	    /!**
 	     * The error event is fired when a resource failed to load.
 	     *
@@ -379,7 +379,7 @@
 	        //console.log(event);
 	        debug.fail('app event: ' + event.message, event, {tags: [event.type, 'event']});
 	    },
-	
+
 	    /!**
 	     * The keydown event is fired when a key is pressed down.
 	     * Set event.stop to true in order to prevent bubbling.
@@ -396,28 +396,28 @@
 	    keydown: function ( event ) {
 	        var page = app.activePage,
 	            activeComponent;
-	
+
 	        if ( DEVELOP ) {
 	            if ( !page ) { throw new Error(__filename + ': app should have at least one page'); }
 	        }
-	
+
 	        // filter phantoms
 	        //if ( event.keyCode === 0 ) { return; }
-	
+
 	        // combined key code
 	        //event.code = event.keyCode;
-	
+
 	        // apply key modifiers
 	        //if ( event.shiftKey ) { event.code += 1000; }
 	        //if ( event.altKey )   { event.code += 2000; }
-	
+
 	        //debug.event(event);
 	        //console.log(event);
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // page.activeComponent can be set to null in event handles
 	        activeComponent = page.activeComponent;
-	
+
 	        // current component handler
 	        if ( activeComponent && activeComponent !== page ) {
 	            // component is available and not page itself
@@ -425,7 +425,7 @@
 	                // there are some listeners
 	                activeComponent.emit(event.type, event);
 	            }
-	
+
 	            // todo: bubble event recursively
 	            // bubbling
 	            /!*if (
@@ -437,7 +437,7 @@
 	                activeComponent.parent.emit(event.type, event);
 	            }*!/
 	        }
-	
+
 	        // page handler
 	        if ( !event.stop ) {
 	            // not prevented
@@ -445,7 +445,7 @@
 	                // there are some listeners
 	                page.emit(event.type, event);
 	            }
-	
+
 	            // global app handler
 	            if ( !event.stop ) {
 	                // not prevented
@@ -455,13 +455,13 @@
 	                }
 	            }
 	        }
-	
+
 	        //// suppress non-printable keys in stb device (not in your browser)
 	        //if ( app.data.host && keyCodes[event.code] ) {
 	        //    event.preventDefault();
 	        //}
 	    },
-	
+
 	    /!**
 	     * The keypress event is fired when press a printable character.
 	     * Delivers the event only to activeComponent at active page.
@@ -473,14 +473,14 @@
 	     *!/
 	    keypress: function ( event ) {
 	        var page = app.activePage;
-	
+
 	        if ( DEVELOP ) {
 	            if ( page === null || page === undefined ) { throw new Error(__filename + ': app should have at least one page'); }
 	        }
-	
+
 	        //debug.event(event);
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // current component handler
 	        if ( page.activeComponent && page.activeComponent !== page ) {
 	            // component is available and not page itself
@@ -490,7 +490,7 @@
 	            }
 	        }
 	    },
-	
+
 	    /!**
 	     * The click event is fired when a pointing device button (usually a mouse button) is pressed and released on a single element.
 	     *
@@ -503,7 +503,7 @@
 	        //console.log(event);
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
 	    },*!/
-	
+
 	    /!**
 	     * The contextmenu event is fired when the right button of the mouse is clicked (before the context menu is displayed),
 	     * or when the context menu key is pressed (in which case the context menu is displayed at the bottom left of the focused
@@ -515,28 +515,28 @@
 	     *!/
 	    /!*contextmenu: function ( event ) {
 	        //var kbEvent = {}; //Object.create(document.createEvent('KeyboardEvent'));
-	
+
 	        //debug.event(event);
 	        //console.log(event);
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        //kbEvent.type    = 'keydown';
 	        //kbEvent.keyCode = 8;
-	
+
 	        //debug.log(kbEvent.type);
-	
+
 	        //globalEventListenerKeydown(kbEvent);
 	        //var event = document.createEvent('KeyboardEvent');
 	        //event.initEvent('keydown', true, true);
-	
+
 	        //document.dispatchEvent(kbEvent);
-	
+
 	        if ( !DEVELOP ) {
 	            // disable right click in release mode
 	            event.preventDefault();
 	        }
 	    },*!/
-	
+
 	    /!**
 	     * The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated.
 	     *
@@ -546,15 +546,15 @@
 	     *!/
 	    mousewheel: function ( event ) {
 	        var page = app.activePage;
-	
+
 	        if ( DEVELOP ) {
 	            if ( page === null || page === undefined ) { throw new Error(__filename + ': app should have at least one page'); }
 	        }
-	
+
 	        //debug.event(event);
 	        //console.log(event);
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // current component handler
 	        if ( page.activeComponent && page.activeComponent !== page ) {
 	            // component is available and not page itself
@@ -563,7 +563,7 @@
 	                page.activeComponent.emit(event.type, event);
 	            }
 	        }
-	
+
 	        // page handler
 	        if ( !event.stop ) {
 	            // not prevented
@@ -574,16 +574,16 @@
 	        }
 	    }
 	};*/
-	
+
 	//events = require('./lib/events');
-	
-	
+
+
 	// apply DOM events
 	Object.keys(events).forEach(function ( name ) {
 	    window.addEventListener(name, events[name]);
 	});
-	
-	
+
+
 	// public
 	module.exports = app;
 
@@ -599,16 +599,16 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	/* eslint no-path-concat: 0 */
-	
+
 	'use strict';
-	
+
 	var Emitter = __webpack_require__(/*! cjs-emitter */ 3),
 	    parse   = __webpack_require__(/*! cjs-query */ 4).parse,
 	    app     = new Emitter();
-	
-	
+
+
 	/**
 	 * Make the given inactive/hidden page active/visible.
 	 * Pass some data to the page and trigger the corresponding event.
@@ -625,26 +625,26 @@
 	        page.$node.classList.add('active');
 	        page.active = true;
 	        app.activePage = page;
-	
+
 	        debug.info('show component ' + page.name + '#' + page.id, null, {
 	            tags: ['show', 'component', page.name, page.id]
 	        });
 	        //console.log('component ' + page.name + '.' + page.id + ' show', 'green');
-	
+
 	        // there are some listeners
 	        if ( page.events['show'] ) {
 	            // notify listeners
 	            page.emit('show', {page: page, data: data});
 	        }
-	
+
 	        return true;
 	    }
-	
+
 	    // nothing was done
 	    return false;
 	}
-	
-	
+
+
 	/**
 	 * Make the given active/visible page inactive/hidden and trigger the corresponding event.
 	 *
@@ -659,39 +659,39 @@
 	        page.$node.classList.remove('active');
 	        page.active  = false;
 	        app.activePage = null;
-	
+
 	        debug.info('hide component ' + page.name + '#' + page.id, null, {
 	            tags: ['hide', 'component', page.name, page.id]
 	        });
 	        //console.log('component ' + page.name + '.' + page.id + ' hide', 'grey');
-	
+
 	        // there are some listeners
 	        if ( page.events['hide'] ) {
 	            // notify listeners
 	            page.emit('hide', {page: page});
 	        }
-	
+
 	        return true;
 	    }
-	
+
 	    // nothing was done
 	    return false;
 	}
-	
-	
+
+
 	// url request params
 	app.query = parse(document.location.search.substring(1));
-	
-	
+
+
 	// global application configuration
 	// in config.js file in js root
 	app.config = __webpack_require__(/*! app:config */ 5);
-	
-	
+
+
 	// the only visible page
 	app.activePage = null;
-	
-	
+
+
 	/**
 	 * Browse to a given page.
 	 * Do nothing if the link is invalid. Otherwise hide the current, show new and update the "previous" link.
@@ -703,49 +703,49 @@
 	 */
 	app.route = function ( pageTo, data ) {
 	    var pageFrom = app.activePage;
-	
+
 	    if ( true ) {
 	        //if ( router.pages.length > 0 ) {
 	        if ( !pageTo || typeof pageTo !== 'object' ) { throw new Error(__filename + ': wrong pageTo type'); }
 	        if ( !('active' in pageTo) ) { throw new Error(__filename + ': missing field "active" in pageTo'); }
 	        //}
 	    }
-	
+
 	    // valid not already active page
 	    if ( pageTo && !pageTo.active ) {
 	        //debug.log('router.navigate: ' + pageTo.id, pageTo === pageFrom ? 'grey' : 'green');
 	        debug.info('app route: ' + pageTo.name + '#' + pageTo.id, null, {tags: ['route', pageTo.name, pageTo.id]});
-	
+
 	        // update url
 	        //location.hash = this.stringify(name, data);
-	
+
 	        // apply visibility
 	        hidePage(app.activePage);
 	        showPage(pageTo, data);
-	
+
 	        // there are some listeners
 	        if ( this.events['route'] ) {
 	            // notify listeners
 	            this.emit('route', {from: pageFrom, to: pageTo});
 	        }
-	
+
 	        // store
 	        //this.history.push(pageTo);
-	
+
 	        return true;
 	    }
-	
+
 	    debug.warn('invalid page to route: ' + pageTo.id, null, {tags: ['route', 'page', pageTo.id]});
 	    //console.log('router.navigate: ' + pageTo.id, 'red');
-	
+
 	    // nothing was done
 	    return false;
 	};
-	
-	
+
+
 	// public
 	module.exports = app;
-	
+
 	/* WEBPACK VAR INJECTION */}.call(exports, "../app/lib/core.js"))
 
 /***/ },
@@ -759,12 +759,12 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	/* eslint no-path-concat: 0 */
-	
+
 	'use strict';
-	
-	
+
+
 	/**
 	 * Base Events Emitter implementation.
 	 *
@@ -776,11 +776,11 @@
 	 */
 	function Emitter () {
 	    console.assert(typeof this === 'object', 'must be constructed via new');
-	
+
 	    // if ( DEVELOP ) {
 	    //     if ( typeof this !== 'object' ) { throw new Error(__filename + ': must be constructed via new'); }
 	    // }
-	
+
 	    /**
 	     * Inner hash table for event names and linked callbacks.
 	     * Manual editing should be avoided.
@@ -800,8 +800,8 @@
 	     **/
 	    this.events = {};
 	}
-	
-	
+
+
 	Emitter.prototype = {
 	    /**
 	     * Bind an event to the given callback function.
@@ -820,20 +820,20 @@
 	        console.assert(typeof name === 'string', 'wrong name type');
 	        console.assert(name.length > 0, 'empty name');
 	        console.assert(typeof callback === 'function', 'callback should be a function');
-	
+
 	        // if ( DEVELOP ) {
 	        //     if ( arguments.length !== 2 ) { throw new Error(__filename + ': wrong arguments number'); }
 	        //     if ( typeof name !== 'string' || name.length === 0 ) { throw new Error(__filename + ': wrong or empty name'); }
 	        //     if ( typeof callback !== 'function' ) { throw new Error(__filename + ': wrong callback type'); }
 	        // }
-	
+
 	        // initialization may be required
 	        this.events[name] = this.events[name] || [];
 	        // append this new event to the list
 	        this.events[name].push(callback);
 	    },
-	
-	
+
+
 	    /**
 	     * Add a one time listener for the event.
 	     * This listener is invoked only the next time the event is fired, after which it is removed.
@@ -847,13 +847,13 @@
 	    once: function ( name, callback ) {
 	        // current execution context
 	        var self = this;
-	
+
 	        if ( true ) {
 	            if ( arguments.length !== 2 ) { throw new Error(__filename + ': wrong arguments number'); }
 	            if ( typeof name !== 'string' || name.length === 0 ) { throw new Error(__filename + ': wrong or empty name'); }
 	            if ( typeof callback !== 'function' ) { throw new Error(__filename + ': wrong callback type'); }
 	        }
-	
+
 	        // initialization may be required
 	        this.events[name] = this.events[name] || [];
 	        // append this new event to the list
@@ -862,8 +862,8 @@
 	            self.removeListener(name, onceWrapper);
 	        });
 	    },
-	
-	
+
+
 	    /**
 	     * Apply multiple listeners at once.
 	     *
@@ -877,21 +877,21 @@
 	     */
 	    addListeners: function ( callbacks ) {
 	        var name;
-	
+
 	        if ( true ) {
 	            if ( arguments.length !== 1 ) { throw new Error(__filename + ': wrong arguments number'); }
 	            if ( typeof callbacks !== 'object' ) { throw new Error(__filename + ': wrong callbacks type'); }
 	            if ( Object.keys(callbacks).length === 0 ) { throw new Error(__filename + ': no callbacks given'); }
 	        }
-	
+
 	        for ( name in callbacks ) {
 	            if ( callbacks.hasOwnProperty(name) ) {
 	                this.addListener(name, callbacks[name]);
 	            }
 	        }
 	    },
-	
-	
+
+
 	    /**
 	     * Remove all instances of the given callback.
 	     *
@@ -908,7 +908,7 @@
 	            if ( typeof callback !== 'function' ) { throw new Error(__filename + ': wrong callback type'); }
 	            if ( this.events[name] && !Array.isArray(this.events[name]) ) { throw new Error(__filename + ': corrupted inner data'); }
 	        }
-	
+
 	        // the event exists and should have some callbacks
 	        if ( this.events[name] ) {
 	            // rework the callback list to exclude the given one
@@ -920,8 +920,8 @@
 	            }
 	        }
 	    },
-	
-	
+
+
 	    /**
 	     * Remove all callbacks for the given event name.
 	     * Without event name clears all events.
@@ -940,7 +940,7 @@
 	                throw new Error(__filename + ': wrong or empty name');
 	            }
 	        }
-	
+
 	        // check input
 	        if ( arguments.length === 0 ) {
 	            // no arguments so remove everything
@@ -949,14 +949,14 @@
 	            if ( DEVELOP ) {
 	                if ( this.events[name] ) { throw new Error(__filename + ': event is not removed'); }
 	            }
-	
+
 	            // only name is given so remove all callbacks for the given event
 	            // but object structure modification should be avoided
 	            this.events[name] = undefined;
 	        }
 	    },*/
-	
-	
+
+
 	    /**
 	     * Execute each of the listeners in the given order with the supplied arguments.
 	     *
@@ -975,38 +975,38 @@
 	    emit: function ( name ) {
 	        var event = this.events[name],
 	            index;
-	
+
 	        if ( true ) {
 	            if ( arguments.length < 1 ) { throw new Error(__filename + ': wrong arguments number'); }
 	            if ( typeof name !== 'string' || name.length === 0 ) { throw new Error(__filename + ': wrong or empty name'); }
 	        }
-	
+
 	        // the event exists and should have some callbacks
 	        if ( event ) {
 	            if ( true ) {
 	                if ( !Array.isArray(event) ) { throw new Error(__filename + ': wrong event type'); }
 	            }
-	
+
 	            for ( index = 0; index < event.length; index++ ) {
 	                if ( true ) {
 	                    if ( typeof event[index] !== 'function' ) { throw new Error(__filename + ': wrong event callback type'); }
 	                }
-	
+
 	                // invoke the callback with parameters
 	                event[index].apply(this, Array.prototype.slice.call(arguments, 1));
 	            }
 	        }
 	    }
 	};
-	
-	
+
+
 	// correct constructor name
 	Emitter.prototype.constructor = Emitter;
-	
-	
+
+
 	// public
 	module.exports = Emitter;
-	
+
 	/* WEBPACK VAR INJECTION */}.call(exports, "../../cjssdk/emitter/index.js"))
 
 /***/ },
@@ -1020,9 +1020,9 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	'use strict';
-	
+
 	module.exports = {
 	    /**
 	     * Parse the given location search string into object.
@@ -1033,7 +1033,7 @@
 	     */
 	    parse: function ( query ) {
 	        var data = {};
-	
+
 	        // parse and fill the data
 	        query.split('&').forEach(function ( part ) {
 	            part = part.split('=');
@@ -1042,11 +1042,11 @@
 	                data[part[0]] = decodeURIComponent(part[1]);
 	            }
 	        });
-	
+
 	        return data;
 	    },
-	
-	
+
+
 		/**
 	     * Make uri query part in a string form.
 	     *
@@ -1056,11 +1056,11 @@
 	     */
 	    stringify: function ( params ) {
 	        var data = [];
-	
+
 	        Object.keys(params).forEach(function ( name ) {
 	            data.push(name + '=' + encodeURIComponent(params[name]));
 	        });
-	
+
 	        return data.join('&');
 	    }
 	};
@@ -1078,9 +1078,9 @@
 	 * Can store run-time options, API urls, paths, execution flags and so on.
 	 * Automatically loaded on application initialization and available as app.config.
 	 */
-	
+
 	'use strict';
-	
+
 	// public
 	module.exports = {};
 
@@ -1096,22 +1096,22 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	/* eslint no-path-concat: 0 */
-	
+
 	'use strict';
-	
+
 	var app = __webpack_require__(/*! ./core */ 2);
-	
-	
+
+
 	// public
 	module.exports = {
 	    DOMContentLoaded: function ( event ) {
 	        //debug.event(event);
 	        //console.log(event);
-	
+
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // there are some listeners
 	        if ( app.events['dom'] ) {
 	            // notify listeners
@@ -1119,7 +1119,7 @@
 	            //console.log('DOMContentLoaded');
 	        }
 	    },
-	
+
 	    /**
 	     * The load event is fired when a resource and its dependent resources have finished loading.
 	     *
@@ -1134,36 +1134,36 @@
 	     */
 	    load: function ( event ) {
 	        //var path;
-	
+
 	        //debug.event(event);
 	        //console.log(event);
-	
+
 	        // time mark
 	        //app.data.time.load = event.timeStamp;
-	
+
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // global handler
 	        // there are some listeners
 	        if ( app.events[event.type] ) {
 	            // notify listeners
 	            app.emit(event.type, event);
 	        }
-	
+
 	        // local handler on each page
 	        /*router.pages.forEach(function forEachPages ( page ) {
 	         debug.log('component ' + page.constructor.name + '.' + page.id + ' load', 'green');
-	
+
 	         // there are some listeners
 	         if ( page.events[event.type] ) {
 	         // notify listeners
 	         page.emit(event.type, event);
 	         }
 	         });*/
-	
+
 	        // time mark
 	        //app.data.time.done = +new Date();
-	
+
 	        // everything is ready
 	        // and there are some listeners
 	        // if ( app.events['done'] ) {
@@ -1171,7 +1171,7 @@
 	        //     app.emit('done', event);
 	        // }
 	    },
-	
+
 	    /**
 	     * The unload event is fired when the document or a child resource is being unloaded.
 	     *
@@ -1186,20 +1186,20 @@
 	    unload: function ( event ) {
 	        //debug.event(event);
 	        //console.log(event);
-	
+
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // global handler
 	        // there are some listeners
 	        if ( app.events[event.type] ) {
 	            // notify listeners
 	            app.emit(event.type, event);
 	        }
-	
+
 	        // local handler on each page
 	        /*router.pages.forEach(function forEachPages ( page ) {
 	         debug.log('component ' + page.constructor.name + '.' + page.id + ' unload', 'red');
-	
+
 	         // there are some listeners
 	         if ( page.events[event.type] ) {
 	         // notify listeners
@@ -1207,7 +1207,7 @@
 	         }
 	         });*/
 	    },
-	
+
 	    /**
 	     * The error event is fired when a resource failed to load.
 	     *
@@ -1220,7 +1220,7 @@
 	        //console.log(event);
 	        debug.fail('app event: ' + event.message, event, {tags: [event.type, 'event']});
 	    },
-	
+
 	    /**
 	     * The keydown event is fired when a key is pressed down.
 	     * Set event.stop to true in order to prevent bubbling.
@@ -1241,29 +1241,29 @@
 	                stop: false
 	            },
 	            activeComponent;
-	
+
 	        if ( true ) {
 	            if ( !page ) { throw new Error(__filename + ': app should have at least one page'); }
 	        }
-	
+
 	        // filter phantoms
 	        //if ( event.keyCode === 0 ) { return; }
-	
+
 	        // combined key code
 	        //event.code = event.keyCode;
-	
+
 	        // apply key modifiers
 	        if ( event.ctrlKey )  { eventLocal.code += 'c'; }
 	        if ( event.altKey )   { eventLocal.code += 'a'; }
 	        if ( event.shiftKey ) { eventLocal.code += 's'; }
-	
+
 	        //debug.event(event);
 	        //console.log(event);
 	        debug.info('app event: ' + event.type + ' - ' + eventLocal.code, event, {tags: [event.type, 'event']});
-	
+
 	        // page.activeComponent can be set to null in event handles
 	        activeComponent = page.activeComponent;
-	
+
 	        // current component handler
 	        if ( activeComponent && activeComponent !== page ) {
 	            // component is available and not page itself
@@ -1271,7 +1271,7 @@
 	                // there are some listeners
 	                activeComponent.emit(event.type, eventLocal, event);
 	            }
-	
+
 	            // todo: bubble event recursively
 	            // bubbling
 	            if (
@@ -1283,7 +1283,7 @@
 	                activeComponent.parent.emit(event.type, eventLocal, event);
 	            }
 	        }
-	
+
 	        // page handler
 	        if ( !eventLocal.stop ) {
 	            // not prevented
@@ -1291,7 +1291,7 @@
 	                // there are some listeners
 	                page.emit(event.type, eventLocal, event);
 	            }
-	
+
 	            // global app handler
 	            if ( !event.stop ) {
 	                // not prevented
@@ -1301,13 +1301,13 @@
 	                }
 	            }
 	        }
-	
+
 	        //// suppress non-printable keys in stb device (not in your browser)
 	        //if ( app.data.host && keyCodes[event.code] ) {
 	        //    event.preventDefault();
 	        //}
 	    },
-	
+
 	    /**
 	     * The keypress event is fired when press a printable character.
 	     * Delivers the event only to activeComponent at active page.
@@ -1319,15 +1319,15 @@
 	     */
 	    keypress: function ( event ) {
 	        var page = app.activePage;
-	
+
 	        if ( true ) {
 	            if ( page === null || page === undefined ) { throw new Error(__filename + ': app should have at least one page'); }
 	        }
-	
+
 	        //debug.event(event);
 	        console.log(event);
 	        debug.info('app event: ' + event.type + ' - ' + event.key, event, {tags: [event.type, 'event']});
-	
+
 	        // current component handler
 	        if ( page.activeComponent && page.activeComponent !== page ) {
 	            // component is available and not page itself
@@ -1337,7 +1337,7 @@
 	            }
 	        }
 	    },
-	
+
 	    /**
 	     * The click event is fired when a pointing device button (usually a mouse button) is pressed and released on a single element.
 	     *
@@ -1350,7 +1350,7 @@
 	     //console.log(event);
 	     debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
 	     },*/
-	
+
 	    /**
 	     * The contextmenu event is fired when the right button of the mouse is clicked (before the context menu is displayed),
 	     * or when the context menu key is pressed (in which case the context menu is displayed at the bottom left of the focused
@@ -1362,37 +1362,37 @@
 	     */
 	    contextmenu: function ( event ) {
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        if ( false ) {
 	            // disable right click in release mode
 	            event.preventDefault();
 	        }
 	    },
-	
+
 	    /*contextmenu: function ( event ) {
 	     //var kbEvent = {}; //Object.create(document.createEvent('KeyboardEvent'));
-	
+
 	     //debug.event(event);
 	     //console.log(event);
 	     debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	     //kbEvent.type    = 'keydown';
 	     //kbEvent.keyCode = 8;
-	
+
 	     //debug.log(kbEvent.type);
-	
+
 	     //globalEventListenerKeydown(kbEvent);
 	     //var event = document.createEvent('KeyboardEvent');
 	     //event.initEvent('keydown', true, true);
-	
+
 	     //document.dispatchEvent(kbEvent);
-	
+
 	     if ( !DEVELOP ) {
 	     // disable right click in release mode
 	     event.preventDefault();
 	     }
 	     },*/
-	
+
 	    /**
 	     * The wheel event is fired when a wheel button of a pointing device (usually a mouse) is rotated.
 	     *
@@ -1402,15 +1402,15 @@
 	     */
 	    mousewheel: function ( event ) {
 	        var page = app.activePage;
-	
+
 	        if ( true ) {
 	            if ( page === null || page === undefined ) { throw new Error(__filename + ': app should have at least one page'); }
 	        }
-	
+
 	        //debug.event(event);
 	        //console.log(event);
 	        debug.info('app event: ' + event.type, event, {tags: [event.type, 'event']});
-	
+
 	        // current component handler
 	        if ( page.activeComponent && page.activeComponent !== page ) {
 	            // component is available and not page itself
@@ -1419,7 +1419,7 @@
 	                page.activeComponent.emit(event.type, event);
 	            }
 	        }
-	
+
 	        // page handler
 	        if ( !event.stop ) {
 	            // not prevented
@@ -1430,7 +1430,7 @@
 	        }
 	    }
 	};
-	
+
 	/* WEBPACK VAR INJECTION */}.call(exports, "../app/lib/events.js"))
 
 /***/ },
@@ -1444,21 +1444,21 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	'use strict';
-	
+
 	var app = __webpack_require__(/*! ../core */ 2);
-	
-	
+
+
 	// public app instance
 	window.app = app;
-	
+
 	// all development tools placeholder
 	app.develop = {};
-	
+
 	// browser logging
 	window.debug = __webpack_require__(/*! ./debug */ 8);
-	
+
 	// tools
 	__webpack_require__(/*! ./wamp */ 9);
 	__webpack_require__(/*! ./events */ 12);
@@ -1479,12 +1479,12 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	/* eslint no-path-concat: 0 */
 	/* eslint new-cap: 0 */
-	
+
 	'use strict';
-	
+
 	var //host      = require('../app').data.host,
 	    app       = __webpack_require__(/*! ../core */ 2),
 	    //util      = require('util'),
@@ -1493,13 +1493,13 @@
 	    debug     = {},
 	    links     = {},
 	    linkId    = 0;
-	
-	
+
+
 	// debug.config = {
 	//     depth: 3
 	// };
-	
-	
+
+
 	/**
 	 * Check condition and warn if not match.
 	 *
@@ -1511,65 +1511,65 @@
 	        console.assert(condition, title);
 	    }
 	};
-	
-	
+
+
 	debug.links = links;
-	
-	
+
+
 	function prepareConfig ( config ) {
 	    config = config || {};
-	
+
 	    config.tags = config.tags || [];
 	    config.tags.push('target');
-	
+
 	    return config;
 	}
-	
-	
+
+
 	function wrapData ( data ) {
 	    var result = {
 	        type: typeof data
 	    };
-	
+
 	    if ( data && result.type === 'object' ) {
 	        result.link = linkId++;
 	        links[result.link] = data;
-	
+
 	        if ( data.constructor && data.constructor.name ) {
 	            result.name = data.constructor.name;
 	        }
-	
+
 	        if ( 'length' in data ) {
 	            result.size = data.length;
 	        }
 	    } else {
 	        result.value = data;
 	    }
-	
+
 	    return result;
 	}
-	
-	
+
+
 	// todo: remove setTimeout hack
 	setTimeout(function () {
 	    app.develop.wamp.addListener('getLinkData', function ( params, callback ) {
 	        var link = links[params.id],
 	            data = {};
-	
+
 	        console.log('incoming getLinkData', params);
 	        //console.log(link);
-	
+
 	        if ( link ) {
 	            Object.keys(link).forEach(function ( name ) {
 	                data[name] = wrapData(link[name]);
 	            });
 	        }
-	
+
 	        callback(null, data);
 	    });
 	}, 1000);
-	
-	
+
+
 	/**
 	 * Print a plain colored string.
 	 *
@@ -1580,10 +1580,10 @@
 	    // message = (message + '') || '(empty message)';
 		//
 	    // console.log('%c%s', 'color:' + (color || 'black'), message);
-	
+
 	    // sanitize
 	    config = config || {};
-	
+
 	    config.info = info;
 	    //config.data = data ? util.inspect(data, {depth: debug.config.depth}) : null;
 	    config.data = data !== undefined ? wrapData(data) : undefined;
@@ -1591,7 +1591,7 @@
 	    config.time = Date.now();
 	    config.targetId = app.query.wampTargetId;
 	    //config.tags = config.tags.sort();
-	
+
 	    if ( app.develop.wamp.open ) {
 	        if ( buffer.length ) {
 	            buffer.forEach(function ( bufItem ) {
@@ -1599,14 +1599,14 @@
 	            });
 	            buffer = [];
 	        }
-	
+
 	        app.develop.wamp.call('sendMessage', config);
 	    } else {
 	        buffer.push(config);
 	    }
 	};
-	
-	
+
+
 	/**
 	 * Print the given var with caption.
 	 *
@@ -1616,7 +1616,7 @@
 	debug.info = function ( info, data, config ) {
 	    /*var type = Object.prototype.toString.call(data).match(/\s([a-zA-Z]+)/)[1].toLowerCase(),
 	        args;
-	
+
 	    args = ['color:' + (type === 'error' ? 'red' : 'green'), type];
 	    if ( title ) {
 	        args.unshift('%c%s\t%c%s\t');
@@ -1628,33 +1628,33 @@
 	    args.push(data);
 	    // output
 	    console.log.apply(console, args);*/
-	
+
 	    config = prepareConfig(config);
 	    //config.tags.push('info');
 	    config.type = 'info';
-	
+
 	    debug.log(info, data, config);
 	};
-	
-	
+
+
 	debug.warn = function ( info, data, config ) {
 	    config = prepareConfig(config);
 	    //config.tags.push('warn');
 	    config.type = 'warn';
-	
+
 	    debug.log(info, data, config);
 	};
-	
-	
+
+
 	debug.fail = function ( info, data, config ) {
 	    config = prepareConfig(config);
 	    //config.tags.push('fail');
 	    config.type = 'fail';
-	
+
 	    debug.log(info, data, config);
 	};
-	
-	
+
+
 	/**
 	 * Print the given complex var with level restriction.
 	 *
@@ -1663,8 +1663,8 @@
 	debug.inspect = function ( data ) {
 	    console.log(data);
 	};
-	
-	
+
+
 	/**
 	 * Print the given event object in some special way.
 	 *
@@ -1673,7 +1673,7 @@
 	debug.event = function ( data ) {
 	    var type  = data.type.toUpperCase(),
 	        color = type === 'ERROR' ? 'red' : 'green';
-	
+
 	    switch ( type ) {
 	        case 'KEYDOWN':
 	        case 'KEYPRESS':
@@ -1688,8 +1688,8 @@
 	            console.log('%o\t%c%s', data, 'color:' + color + ';font-weight:bold', type);
 	    }
 	};
-	
-	
+
+
 	/**
 	 * Start specific timer.
 	 * Use to calculate time of some actions.
@@ -1711,11 +1711,11 @@
 	 */
 	debug.time = function ( name, title ) {
 	    var time = Date.now();
-	
+
 	    // sanitize
 	    name  = name  || '';
 	    title = title || '';
-	
+
 	    // is this mark exist
 	    if ( timeMarks[name] ) {
 	        // already set
@@ -1724,12 +1724,12 @@
 	        // create a new mark
 	        timeMarks[name] = {init: time};
 	    }
-	
+
 	    // update with the current value
 	    timeMarks[name].last = time;
 	};
-	
-	
+
+
 	/**
 	 * End specific timer.
 	 * Use to calculate time of some actions.
@@ -1751,25 +1751,25 @@
 	 */
 	debug.timeEnd = function ( name, title ) {
 	    var time = Date.now();
-	
+
 	    // sanitize
 	    name  = name  || '';
 	    title = title || 'total';
-	
+
 	    // is this mark exist
 	    if ( timeMarks[name] ) {
 	        debug.log((name || 'time') + ' (' + title + '): ' + (time - timeMarks[name].init) + 'ms', 'blue');
-	
+
 	        delete timeMarks[name];
 	    } else {
 	        throw new Error(__filename + ': no started timer for "' + name + '"');
 	    }
 	};
-	
-	
+
+
 	// public
 	module.exports = debug;
-	
+
 	/* WEBPACK VAR INJECTION */}.call(exports, "../app/lib/develop/debug.js"))
 
 /***/ },
@@ -1783,26 +1783,26 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	'use strict';
-	
+
 	var app       = __webpack_require__(/*! ../core */ 2),
 	    Wamp      = __webpack_require__(/*! spa-wamp */ 10),
 	    stringify = __webpack_require__(/*! cjs-query */ 4).stringify;
-	
-	
+
+
 	if ( app.query.wampPort ) {
 	    // correct type
 	    app.query.wampTargetId = parseInt(app.query.wampTargetId, 10);
-	
+
 	    app.develop.wamp = new Wamp(
 	        'ws://' + (app.query.wampHost || location.hostname) + ':' + app.query.wampPort + '/target/' + (app.query.wampTargetId || '')
 	    );
-	
+
 	    app.develop.wamp.onopen = function () {
 	        //app.develop.wamp.addListener(app.develop.wamp.EVENT_OPEN, function () {
 	        debug.info('wamp open ' + app.develop.wamp.socket.url, null, {tags: ['open', 'wamp']});
-	
+
 	        // get target connection id
 	        app.develop.wamp.call('getConnectionInfo', {}, function ( error, data ) {
 	            // check if already linked
@@ -1817,14 +1817,14 @@
 	        });
 	        //});
 	    };
-	
+
 	    app.develop.wamp.onclose = function () {
 	        debug.info('wamp close ' + app.develop.wamp.socket.url, null, {tags: ['close', 'wamp']});
 	    };
-	
+
 	    app.develop.wamp.addListener('evalCode', function ( params, callback ) {
 	        console.log('incoming evalCode', params);
-	
+
 	        /* eslint no-eval: 0 */
 	        callback(null, {eval: eval(params.code)});
 	    });
@@ -1842,12 +1842,12 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	'use strict';
-	
+
 	var CjsWamp = __webpack_require__(/*! cjs-wamp */ 11);
-	
-	
+
+
 	/**
 	 * WAMP implementation wrapper.
 	 *
@@ -1859,38 +1859,38 @@
 	 */
 	function Wamp ( uri, config ) {
 	    var self = this;
-	
+
 	    function getSocket () {
 	        var socket = new WebSocket(uri);
-	
+
 	        socket.onopen = function () {
 	            if ( typeof self.onopen === 'function' ) {
 	                self.onopen();
 	            }
-	
+
 	            // there are some listeners
 	            // if ( self.events[self.EVENT_OPEN] ) {
 	            //     self.emit(self.EVENT_OPEN);
 	            // }
-	
+
 	            // set activity flag
 	            self.open = true;
 	        };
-	
+
 	        // reconnect
 	        socket.onclose = function () {
 	            if ( typeof self.onclose === 'function' && self.open ) {
 	                self.onclose();
 	            }
-	
+
 	            // there are some listeners and it's the first time
 	            // if ( self.events[self.EVENT_CLOSE] && self.open ) {
 	            //     self.emit(self.EVENT_CLOSE);
 	            // }
-	
+
 	            // mark as closed
 	            self.open = false;
-	
+
 	            if ( self.timeout ) {
 	                setTimeout(function () {
 	                    // recreate connection
@@ -1902,44 +1902,44 @@
 	                }, self.timeout);
 	            }
 	        };
-	
+
 	        return socket;
 	    }
-	
+
 	    console.assert(typeof this === 'object', 'must be constructed via new');
-	
+
 	    // sanitize
 	    config = config || {};
-	
+
 	    // connection state
 	    this.open = false;
-	
+
 	    // override prototype value
 	    if ( config.timeout ) {
 	        this.timeout = config.timeout;
 	    }
-	
+
 	    // events
 	    this.onopen  = null;
 	    this.onclose = null;
-	
+
 	    // parent constructor call
 	    CjsWamp.call(this, getSocket());
 	}
-	
-	
+
+
 	// inheritance
 	Wamp.prototype = Object.create(CjsWamp.prototype);
 	Wamp.prototype.constructor = Wamp;
-	
+
 	// configuration
 	Wamp.prototype.timeout = 5000;
-	
+
 	// events
 	// Wamp.prototype.EVENT_OPEN  = 'wamp:connection:open';
 	// Wamp.prototype.EVENT_CLOSE = 'wamp:connection:close';
-	
-	
+
+
 	// public
 	module.exports = Wamp;
 
@@ -1955,15 +1955,15 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	'use strict';
-	
+
 	/** @private */
 	var Emitter   = __webpack_require__(/*! cjs-emitter */ 3),
 	    messageId = 0,
 	    callbacks = {};
-	
-	
+
+
 	/**
 	 * Lightweight WAMP implementation based on WebSockets.
 	 *
@@ -1974,14 +1974,14 @@
 	 */
 	function Wamp ( socket ) {
 	    var self = this;
-	
+
 	    console.assert(typeof this === 'object', 'must be constructed via new');
-	    
+
 	    // parent constructor call
 	    Emitter.call(this);
-	
+
 	    this.socket = socket;
-	
+
 	    if ( 'on' in socket ) {
 	        // server-side
 	        socket.on('message', function ( message ) {
@@ -1994,8 +1994,8 @@
 	        };
 	    }
 	}
-	
-	
+
+
 	/**
 	 * Send data through the given socket.
 	 *
@@ -2007,17 +2007,17 @@
 	    if ( socket.readyState === 1 ) {
 	        // protocol version
 	        message.jsonrpc = '2.0';
-	
+
 	        socket.send(JSON.stringify(message));
 	    }
 	}
-	
-	
+
+
 	// inheritance
 	Wamp.prototype = Object.create(Emitter.prototype);
 	Wamp.prototype.constructor = Wamp;
-	
-	
+
+
 	/**
 	 * Internal method to handle messages.
 	 *
@@ -2028,7 +2028,7 @@
 	Wamp.prototype.router = function ( message ) {
 	    var self = this,
 	        data;
-	
+
 	    try {
 	        data = JSON.parse(message);
 	    } catch ( error ) {
@@ -2036,10 +2036,10 @@
 	            error: {code: -32700, message: 'Parse error'},
 	            id: null
 	        });
-	
+
 	        return;
 	    }
-	
+
 	    if ( 'id' in data && !('method' in data) ) {
 	        // incoming answer for previous request
 	        if ( data.id in callbacks ) {
@@ -2078,8 +2078,8 @@
 	        });
 	    }
 	};
-	
-	
+
+
 	/**
 	 * Send message to execute remotely or notify (without `callback` argument).
 	 *
@@ -2092,18 +2092,18 @@
 	        method: method,
 	        params: params
 	    };
-	
+
 	    // execution mode with callback
 	    // notification mode otherwise
 	    if ( typeof callback === 'function' ) {
 	        message.id = ++messageId;
 	        callbacks[messageId] = callback;
 	    }
-	
+
 	    send(this.socket, message);
 	};
-	
-	
+
+
 	// public
 	module.exports = Wamp;
 
@@ -2121,11 +2121,11 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	'use strict';
-	
+
 	/* eslint new-cap: 0 */
-	
+
 	var //util    = require('util'),
 	    app      = __webpack_require__(/*! ../core */ 2),
 	    //Wamp     = require('spa-wamp'),
@@ -2135,51 +2135,51 @@
 	    //app;
 	    //dom     = require('spa-dom'),
 	    //grid    = require('./grid');
-	
-	
+
+
 	events.load = function () {
 	    // app instance
 	    //window.app = app = require('spa-app');
-	
+
 	    /*if ( app.query.wampPort ) {
 	        //console.log('connect to WAMP server');
 	        app.develop.wamp = new Wamp(
 	            //new WebSocket('ws://' + (app.query.wampHost || location.hostname) + ':' + app.query.wampPort + '/target')
 	            'ws://' + (app.query.wampHost || location.hostname) + ':' + app.query.wampPort + '/target'
 	        );
-	
+
 	        app.develop.wamp.addListener('connection:open', function () {
 	            console.log('wamp open ' + app.develop.wamp.socket.url);
 	        });
-	
+
 	        app.develop.wamp.addListener('connection:close', function () {
 	            console.log('wamp close ' + app.develop.wamp.socket.url);
 	        });
-	
+
 	        // ready
 	        /!*window.app.wamp.socket.onopen = function () {
 	            console.log('wamp is ready!');
 	        };*!/
 	    }*/
-	
+
 	    // export to globals div for develop HTML elements
 	    /*window.$develop = document.body.appendChild(document.createElement('div'));
 	    window.$develop.className = 'develop';/**/
-	
+
 	    // apply dev css
 	    document.body.classList.add('develop');
-	
+
 	    //grid.init();
-	
+
 	    //if ( localStorage.getItem('grid.active') ) {
 	    //    grid.show();
 	    //}
-	
+
 	    // stress-testing
 	    app.develop.horde = gremlins.createHorde();
 	};
-	
-	
+
+
 	events.keydown = function ( event ) {
 	    switch ( event.keyCode ) {
 	        // key b
@@ -2196,7 +2196,7 @@
 	            location.hash = '';
 	            location.reload();
 	            break;
-	
+
 	        // numpad 5
 	        //case 101:
 	        //    // debug grid
@@ -2208,13 +2208,13 @@
 	        //    debug.log('show grid: ' + grid.active, 'red');
 	        //    localStorage.setItem('grid.active', grid.active);
 	        //    break;
-	
+
 	        // numpad 6
 	        case 102:
 	            // stress-testing
 	            app.develop.horde.unleash({nb: 500});
 	            break;
-	
+
 	        // numpad 7
 	        /*case 103:
 	            //if ( !app.data.host ) {
@@ -2237,7 +2237,7 @@
 	                        localStorage.setItem('spyjs.active', true);
 	                        debug.log('SpyJS: enable', 'red');
 	                        debug.log('SpyJS: set proxy to ' + location.hostname + ':' + 3546);
-	
+
 	                        gSTB.SetWebProxy(location.hostname, 3546, '', '', '');
 	                        location.reload();
 	                    },
@@ -2248,7 +2248,7 @@
 	            }
 	            //}
 	            break;*/
-	
+
 	        //// numpad 8
 	        //case 104:
 	        //    // FireBug Lite
@@ -2264,7 +2264,7 @@
 	        //        }
 	        //    }));
 	        //    break;
-	
+
 	        // numpad 9
 	        case 105:
 	            // outline components and inner structures
@@ -2277,7 +2277,7 @@
 	                }
 	            });
 	            break;
-	
+
 	        // numpad .
 	        case 110:
 	            // CSS reload
@@ -2290,13 +2290,13 @@
 	            break;
 	    }
 	};
-	
-	
+
+
 	// additional top-level key handlers
 	window.addEventListener('load',    events.load);
 	window.addEventListener('keydown', events.keydown);
-	
-	
+
+
 	// public
 	module.exports = events;
 
@@ -2322,36 +2322,36 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	/* eslint no-path-concat: 0 */
-	
+
 	'use strict';
-	
+
 	var getElementById = document.getElementById,
 	    querySelector  = document.querySelector;
-	
-	
+
+
 	document.getElementById = function ( id ) {
 	    var el = getElementById.call(document, id);
-	
+
 	    if ( !el ) {
 	        throw new Error(__filename + ': no element with id ' + id);
 	    }
-	
+
 	    return el;
 	};
-	
-	
+
+
 	document.querySelector = function ( selector ) {
 	    var el = querySelector.call(document, selector);
-	
+
 	    if ( !el ) {
 	        throw new Error(__filename + ': no element with selector: ' + selector);
 	    }
-	
+
 	    return el;
 	};
-	
+
 	/* WEBPACK VAR INJECTION */}.call(exports, "../app/lib/develop/hooks.js"))
 
 /***/ },
@@ -2367,12 +2367,12 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	'use strict';
-	
+
 	//var tag = require('spa-dom').tag;
-	
-	
+
+
 	//window.LiveReloadOptions = {port: LIVERELOAD.port};
 	window.LiveReloadOptions = {
 	    host: location.hostname,
@@ -2380,9 +2380,9 @@
 	};
 	//console.log(require('spa-gulp-livereload/config').default.tinylr);
 	//console.log(LIVERELOAD);
-	
+
 	__webpack_require__(/*! livereload-js/dist/livereload.js */ 16);
-	
+
 	// livereload activation
 	//if ( config.livereload ) {
 	    // load external script
@@ -2403,11 +2403,11 @@
 	(function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 	(function() {
 	  var Connector, PROTOCOL_6, PROTOCOL_7, Parser, Version, _ref;
-	
+
 	  _ref = require('./protocol'), Parser = _ref.Parser, PROTOCOL_6 = _ref.PROTOCOL_6, PROTOCOL_7 = _ref.PROTOCOL_7;
-	
+
 	  Version = '2.2.2';
-	
+
 	  exports.Connector = Connector = (function() {
 	    function Connector(options, WebSocket, Timer, handlers) {
 	      this.options = options;
@@ -2459,11 +2459,11 @@
 	      })(this));
 	      this.connect();
 	    }
-	
+
 	    Connector.prototype._isSocketConnected = function() {
 	      return this.socket && this.socket.readyState === this.WebSocket.OPEN;
 	    };
-	
+
 	    Connector.prototype.connect = function() {
 	      this._connectionDesired = true;
 	      if (this._isSocketConnected()) {
@@ -2495,7 +2495,7 @@
 	        };
 	      })(this);
 	    };
-	
+
 	    Connector.prototype.disconnect = function() {
 	      this._connectionDesired = false;
 	      this._reconnectTimer.stop();
@@ -2505,7 +2505,7 @@
 	      this._disconnectionReason = 'manual';
 	      return this.socket.close();
 	    };
-	
+
 	    Connector.prototype._scheduleReconnection = function() {
 	      if (!this._connectionDesired) {
 	        return;
@@ -2515,24 +2515,24 @@
 	        return this._nextDelay = Math.min(this.options.maxdelay, this._nextDelay * 2);
 	      }
 	    };
-	
+
 	    Connector.prototype.sendCommand = function(command) {
 	      if (this.protocol == null) {
 	        return;
 	      }
 	      return this._sendCommand(command);
 	    };
-	
+
 	    Connector.prototype._sendCommand = function(command) {
 	      return this.socket.send(JSON.stringify(command));
 	    };
-	
+
 	    Connector.prototype._closeOnError = function() {
 	      this._handshakeTimeout.stop();
 	      this._disconnectionReason = 'error';
 	      return this.socket.close();
 	    };
-	
+
 	    Connector.prototype._onopen = function(e) {
 	      var hello;
 	      this.handlers.socketConnected();
@@ -2554,29 +2554,29 @@
 	      this._sendCommand(hello);
 	      return this._handshakeTimeout.start(this.options.handshake_timeout);
 	    };
-	
+
 	    Connector.prototype._onclose = function(e) {
 	      this.protocol = 0;
 	      this.handlers.disconnected(this._disconnectionReason, this._nextDelay);
 	      return this._scheduleReconnection();
 	    };
-	
+
 	    Connector.prototype._onerror = function(e) {};
-	
+
 	    Connector.prototype._onmessage = function(e) {
 	      return this.protocolParser.process(e.data);
 	    };
-	
+
 	    return Connector;
-	
+
 	  })();
-	
+
 	}).call(this);
-	
+
 	},{"./protocol":6}],2:[function(require,module,exports){
 	(function() {
 	  var CustomEvents;
-	
+
 	  CustomEvents = {
 	    bind: function(element, eventName, handler) {
 	      if (element.addEventListener) {
@@ -2607,27 +2607,27 @@
 	      }
 	    }
 	  };
-	
+
 	  exports.bind = CustomEvents.bind;
-	
+
 	  exports.fire = CustomEvents.fire;
-	
+
 	}).call(this);
-	
+
 	},{}],3:[function(require,module,exports){
 	(function() {
 	  var LessPlugin;
-	
+
 	  module.exports = LessPlugin = (function() {
 	    LessPlugin.identifier = 'less';
-	
+
 	    LessPlugin.version = '1.0';
-	
+
 	    function LessPlugin(window, host) {
 	      this.window = window;
 	      this.host = host;
 	    }
-	
+
 	    LessPlugin.prototype.reload = function(path, options) {
 	      if (this.window.less && this.window.less.refresh) {
 	        if (path.match(/\.less$/i)) {
@@ -2639,7 +2639,7 @@
 	      }
 	      return false;
 	    };
-	
+
 	    LessPlugin.prototype.reloadLess = function(path) {
 	      var link, links, _i, _len;
 	      links = (function() {
@@ -2665,32 +2665,32 @@
 	      this.window.less.refresh(true);
 	      return true;
 	    };
-	
+
 	    LessPlugin.prototype.analyze = function() {
 	      return {
 	        disable: !!(this.window.less && this.window.less.refresh)
 	      };
 	    };
-	
+
 	    return LessPlugin;
-	
+
 	  })();
-	
+
 	}).call(this);
-	
+
 	},{}],4:[function(require,module,exports){
 	(function() {
 	  var Connector, LiveReload, Options, Reloader, Timer,
 	    __hasProp = {}.hasOwnProperty;
-	
+
 	  Connector = require('./connector').Connector;
-	
+
 	  Timer = require('./timer').Timer;
-	
+
 	  Options = require('./options').Options;
-	
+
 	  Reloader = require('./reloader').Reloader;
-	
+
 	  exports.LiveReload = LiveReload = (function() {
 	    function LiveReload(window) {
 	      var k, v, _ref;
@@ -2792,15 +2792,15 @@
 	      });
 	      this.initialized = true;
 	    }
-	
+
 	    LiveReload.prototype.on = function(eventName, handler) {
 	      return this.listeners[eventName] = handler;
 	    };
-	
+
 	    LiveReload.prototype.log = function(message) {
 	      return this.console.log("" + message);
 	    };
-	
+
 	    LiveReload.prototype.performReload = function(message) {
 	      var _ref, _ref1;
 	      this.log("LiveReload received reload request: " + (JSON.stringify(message, null, 2)));
@@ -2812,11 +2812,11 @@
 	        serverURL: "http://" + this.options.host + ":" + this.options.port
 	      });
 	    };
-	
+
 	    LiveReload.prototype.performAlert = function(message) {
 	      return alert(message.message);
 	    };
-	
+
 	    LiveReload.prototype.shutDown = function() {
 	      var _base;
 	      if (!this.initialized) {
@@ -2826,11 +2826,11 @@
 	      this.log("LiveReload disconnected.");
 	      return typeof (_base = this.listeners).shutdown === "function" ? _base.shutdown() : void 0;
 	    };
-	
+
 	    LiveReload.prototype.hasPlugin = function(identifier) {
 	      return !!this.pluginIdentifiers[identifier];
 	    };
-	
+
 	    LiveReload.prototype.addPlugin = function(pluginClass) {
 	      var plugin;
 	      if (!this.initialized) {
@@ -2855,7 +2855,7 @@
 	      this.plugins.push(plugin);
 	      this.reloader.addPlugin(plugin);
 	    };
-	
+
 	    LiveReload.prototype.analyze = function() {
 	      var plugin, pluginData, pluginsData, _i, _len, _ref;
 	      if (!this.initialized) {
@@ -2877,17 +2877,17 @@
 	        url: this.window.location.href
 	      });
 	    };
-	
+
 	    return LiveReload;
-	
+
 	  })();
-	
+
 	}).call(this);
-	
+
 	},{"./connector":1,"./options":5,"./reloader":7,"./timer":9}],5:[function(require,module,exports){
 	(function() {
 	  var Options;
-	
+
 	  exports.Options = Options = (function() {
 	    function Options() {
 	      this.https = false;
@@ -2900,7 +2900,7 @@
 	      this.maxdelay = 60000;
 	      this.handshake_timeout = 5000;
 	    }
-	
+
 	    Options.prototype.set = function(name, value) {
 	      if (typeof value === 'undefined') {
 	        return;
@@ -2910,11 +2910,11 @@
 	      }
 	      return this[name] = value;
 	    };
-	
+
 	    return Options;
-	
+
 	  })();
-	
+
 	  Options.extract = function(document) {
 	    var element, keyAndValue, m, mm, options, pair, src, _i, _j, _len, _len1, _ref, _ref1;
 	    _ref = document.getElementsByTagName('script');
@@ -2943,37 +2943,37 @@
 	    }
 	    return null;
 	  };
-	
+
 	}).call(this);
-	
+
 	},{}],6:[function(require,module,exports){
 	(function() {
 	  var PROTOCOL_6, PROTOCOL_7, Parser, ProtocolError,
 	    __indexOf = [].indexOf || function(item) { for (var i = 0, l = this.length; i < l; i++) { if (i in this && this[i] === item) return i; } return -1; };
-	
+
 	  exports.PROTOCOL_6 = PROTOCOL_6 = 'http://livereload.com/protocols/official-6';
-	
+
 	  exports.PROTOCOL_7 = PROTOCOL_7 = 'http://livereload.com/protocols/official-7';
-	
+
 	  exports.ProtocolError = ProtocolError = (function() {
 	    function ProtocolError(reason, data) {
 	      this.message = "LiveReload protocol error (" + reason + ") after receiving data: \"" + data + "\".";
 	    }
-	
+
 	    return ProtocolError;
-	
+
 	  })();
-	
+
 	  exports.Parser = Parser = (function() {
 	    function Parser(handlers) {
 	      this.handlers = handlers;
 	      this.reset();
 	    }
-	
+
 	    Parser.prototype.reset = function() {
 	      return this.protocol = null;
 	    };
-	
+
 	    Parser.prototype.process = function(data) {
 	      var command, e, message, options, _ref;
 	      try {
@@ -3019,7 +3019,7 @@
 	        }
 	      }
 	    };
-	
+
 	    Parser.prototype._parseMessage = function(data, validCommands) {
 	      var e, message, _ref;
 	      try {
@@ -3036,17 +3036,17 @@
 	      }
 	      return message;
 	    };
-	
+
 	    return Parser;
-	
+
 	  })();
-	
+
 	}).call(this);
-	
+
 	},{}],7:[function(require,module,exports){
 	(function() {
 	  var IMAGE_STYLES, Reloader, numberOfMatchingSegments, pathFromUrl, pathsMatch, pickBestMatch, splitUrl;
-	
+
 	  splitUrl = function(url) {
 	    var hash, index, params;
 	    if ((index = url.indexOf('#')) >= 0) {
@@ -3067,7 +3067,7 @@
 	      hash: hash
 	    };
 	  };
-	
+
 	  pathFromUrl = function(url) {
 	    var path;
 	    url = splitUrl(url).url;
@@ -3078,7 +3078,7 @@
 	    }
 	    return decodeURIComponent(path);
 	  };
-	
+
 	  pickBestMatch = function(path, objects, pathFunc) {
 	    var bestMatch, object, score, _i, _len;
 	    bestMatch = {
@@ -3100,7 +3100,7 @@
 	      return null;
 	    }
 	  };
-	
+
 	  numberOfMatchingSegments = function(path1, path2) {
 	    var comps1, comps2, eqCount, len;
 	    path1 = path1.replace(/^\/+/, '').toLowerCase();
@@ -3117,11 +3117,11 @@
 	    }
 	    return eqCount;
 	  };
-	
+
 	  pathsMatch = function(path1, path2) {
 	    return numberOfMatchingSegments(path1, path2) > 0;
 	  };
-	
+
 	  IMAGE_STYLES = [
 	    {
 	      selector: 'background',
@@ -3131,7 +3131,7 @@
 	      styleNames: ['borderImage', 'webkitBorderImage', 'MozBorderImage']
 	    }
 	  ];
-	
+
 	  exports.Reloader = Reloader = (function() {
 	    function Reloader(window, console, Timer) {
 	      this.window = window;
@@ -3141,15 +3141,15 @@
 	      this.importCacheWaitPeriod = 200;
 	      this.plugins = [];
 	    }
-	
+
 	    Reloader.prototype.addPlugin = function(plugin) {
 	      return this.plugins.push(plugin);
 	    };
-	
+
 	    Reloader.prototype.analyze = function(callback) {
 	      return results;
 	    };
-	
+
 	    Reloader.prototype.reload = function(path, options) {
 	      var plugin, _base, _i, _len, _ref;
 	      this.options = options;
@@ -3178,11 +3178,11 @@
 	      }
 	      return this.reloadPage();
 	    };
-	
+
 	    Reloader.prototype.reloadPage = function() {
 	      return this.window.document.location.reload();
 	    };
-	
+
 	    Reloader.prototype.reloadImages = function(path) {
 	      var expando, img, selector, styleNames, styleSheet, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1, _ref2, _ref3, _results;
 	      expando = this.generateUniqueString();
@@ -3213,7 +3213,7 @@
 	        return _results;
 	      }
 	    };
-	
+
 	    Reloader.prototype.reloadStylesheetImages = function(styleSheet, path, expando) {
 	      var e, rule, rules, styleNames, _i, _j, _len, _len1;
 	      try {
@@ -3241,7 +3241,7 @@
 	        }
 	      }
 	    };
-	
+
 	    Reloader.prototype.reloadStyleImages = function(style, styleNames, path, expando) {
 	      var newValue, styleName, value, _i, _len;
 	      for (_i = 0, _len = styleNames.length; _i < _len; _i++) {
@@ -3263,7 +3263,7 @@
 	        }
 	      }
 	    };
-	
+
 	    Reloader.prototype.reloadStylesheet = function(path) {
 	      var imported, link, links, match, style, _i, _j, _k, _l, _len, _len1, _len2, _len3, _ref, _ref1;
 	      links = (function() {
@@ -3320,7 +3320,7 @@
 	      }
 	      return true;
 	    };
-	
+
 	    Reloader.prototype.collectImportedStylesheets = function(link, styleSheet, result) {
 	      var e, index, rule, rules, _i, _len;
 	      try {
@@ -3349,7 +3349,7 @@
 	        }
 	      }
 	    };
-	
+
 	    Reloader.prototype.waitUntilCssLoads = function(clone, func) {
 	      var callbackExecuted, executeCallback, poll;
 	      callbackExecuted = false;
@@ -3383,11 +3383,11 @@
 	      }
 	      return this.Timer.start(this.options.stylesheetReloadTimeout, executeCallback);
 	    };
-	
+
 	    Reloader.prototype.linkHref = function(link) {
 	      return link.href || link.getAttribute('data-href');
 	    };
-	
+
 	    Reloader.prototype.reattachStylesheetLink = function(link) {
 	      var clone, parent;
 	      if (link.__LiveReload_pendingRemoval) {
@@ -3429,7 +3429,7 @@
 	        };
 	      })(this));
 	    };
-	
+
 	    Reloader.prototype.reattachImportedRule = function(_arg) {
 	      var href, index, link, media, newRule, parent, rule, tempLink;
 	      rule = _arg.rule, index = _arg.index, link = _arg.link;
@@ -3467,11 +3467,11 @@
 	        };
 	      })(this));
 	    };
-	
+
 	    Reloader.prototype.generateUniqueString = function() {
 	      return 'livereload=' + Date.now();
 	    };
-	
+
 	    Reloader.prototype.generateCacheBustUrl = function(url, expando) {
 	      var hash, oldParams, originalUrl, params, _ref;
 	      if (expando == null) {
@@ -3497,51 +3497,51 @@
 	      }
 	      return url + params + hash;
 	    };
-	
+
 	    return Reloader;
-	
+
 	  })();
-	
+
 	}).call(this);
-	
+
 	},{}],8:[function(require,module,exports){
 	(function() {
 	  var CustomEvents, LiveReload, k;
-	
+
 	  CustomEvents = require('./customevents');
-	
+
 	  LiveReload = window.LiveReload = new (require('./livereload').LiveReload)(window);
-	
+
 	  for (k in window) {
 	    if (k.match(/^LiveReloadPlugin/)) {
 	      LiveReload.addPlugin(window[k]);
 	    }
 	  }
-	
+
 	  LiveReload.addPlugin(require('./less'));
-	
+
 	  LiveReload.on('shutdown', function() {
 	    return delete window.LiveReload;
 	  });
-	
+
 	  LiveReload.on('connect', function() {
 	    return CustomEvents.fire(document, 'LiveReloadConnect');
 	  });
-	
+
 	  LiveReload.on('disconnect', function() {
 	    return CustomEvents.fire(document, 'LiveReloadDisconnect');
 	  });
-	
+
 	  CustomEvents.bind(document, 'LiveReloadShutDown', function() {
 	    return LiveReload.shutDown();
 	  });
-	
+
 	}).call(this);
-	
+
 	},{"./customevents":2,"./less":3,"./livereload":4}],9:[function(require,module,exports){
 	(function() {
 	  var Timer;
-	
+
 	  exports.Timer = Timer = (function() {
 	    function Timer(func) {
 	      this.func = func;
@@ -3555,7 +3555,7 @@
 	        };
 	      })(this);
 	    }
-	
+
 	    Timer.prototype.start = function(timeout) {
 	      if (this.running) {
 	        clearTimeout(this.id);
@@ -3563,7 +3563,7 @@
 	      this.id = setTimeout(this._handler, timeout);
 	      return this.running = true;
 	    };
-	
+
 	    Timer.prototype.stop = function() {
 	      if (this.running) {
 	        clearTimeout(this.id);
@@ -3571,17 +3571,17 @@
 	        return this.id = null;
 	      }
 	    };
-	
+
 	    return Timer;
-	
+
 	  })();
-	
+
 	  Timer.start = function(timeout, func) {
 	    return setTimeout(func, timeout);
 	  };
-	
+
 	}).call(this);
-	
+
 	},{}]},{},[8]);
 
 
@@ -3595,13 +3595,13 @@
 	/**
 	 * Loading page implementation.
 	 */
-	
+
 	'use strict';
-	
+
 	var Page = __webpack_require__(/*! spa-component-page */ 18),
 	    page = new Page({$node: window.pageInit});
-	
-	
+
+
 	// public
 	module.exports = page;
 
@@ -3617,14 +3617,14 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	/* eslint no-path-concat: 0 */
-	
+
 	'use strict';
-	
+
 	var Component = __webpack_require__(/*! spa-component */ 19);
-	
-	
+
+
 	/**
 	 * Base page implementation.
 	 *
@@ -3649,15 +3649,19 @@
 	function Page ( config ) {
 	    // sanitize
 	    config = config || {};
-	
+
 	    console.assert(typeof this === 'object', 'must be constructed via new');
-	
+
 	    if ( true ) {
-	        if ( typeof config !== 'object' ) { throw new Error(__filename + ': wrong config type'); }
-	        // init parameters checks
-	        if ( config.className && typeof config.className !== 'string' ) { throw new Error(__filename + ': wrong or empty config.className'); }
+            if ( typeof config !== 'object' ) {
+                throw new Error(__filename + ': wrong config type');
+            }
+            // init parameters checks
+            if ( 'className' in config && (!config.className || typeof config.className !== 'string') ) {
+                throw new Error(__filename + ': wrong or empty config.className');
+            }
 	    }
-	
+
 	    /**
 	     * Page visibility/active state flag.
 	     *
@@ -3665,7 +3669,7 @@
 	     * @type {boolean}
 	     */
 	    this.active = false;
-	
+
 	    /**
 	     * Link to the currently active component with focus.
 	     *
@@ -3673,37 +3677,37 @@
 	     * @type {Component}
 	     */
 	    this.activeComponent = null;
-	
+
 	    // set default className if classList property empty or undefined
 	    //config.className = 'page ' + (config.className || '');
-	
+
 	    // parent constructor call
 	    Component.call(this, config);
-	
+
 	    // state flag
 	    this.active = this.$node.classList.contains('active');
-	
+
 	    // correct DOM parent/child connection if necessary
 	    if ( this.$node.parentNode === null ) {
 	        document.body.appendChild(this.$node);
 	    }
-	
+
 	    // always itself
 	    this.page = this;
 	}
-	
-	
+
+
 	// inheritance
 	Page.prototype = Object.create(Component.prototype);
 	Page.prototype.constructor = Page;
-	
+
 	// set component name
 	Page.prototype.name = 'spa-component-page';
-	
-	
+
+
 	// public
 	module.exports = Page;
-	
+
 	/* WEBPACK VAR INJECTION */}.call(exports, "../component-page/index.js"))
 
 /***/ },
@@ -3717,16 +3721,16 @@
 	 * @license The MIT License (MIT)
 	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
-	
+
 	/* eslint no-path-concat: 0 */
-	
+
 	'use strict';
-	
+
 	var app     = __webpack_require__(/*! spa-app/lib/core */ 2),
 	    Emitter = __webpack_require__(/*! cjs-emitter */ 3),
 	    counter = 0;
-	
-	
+
+
 	/**
 	 * Base component implementation.
 	 *
@@ -3767,23 +3771,37 @@
 	    // current execution context
 	    var self = this,
 	        name;
-	
+
 	    // sanitize
 	    config = config || {};
-	
+
 	    console.assert(typeof this === 'object', 'must be constructed via new');
-	
+
 	    if ( true ) {
-	        if ( typeof config !== 'object' ) { throw new Error(__filename + ': wrong config type'); }
-	        // init parameters checks
-	        if ( config.id        && typeof config.id !== 'string'         ) { throw new Error(__filename + ': wrong or empty config.id'); }
-	        if ( config.className && typeof config.className !== 'string'  ) { throw new Error(__filename + ': wrong or empty config.className'); }
-	        if ( config.$node     && !(config.$node instanceof Element)    ) { throw new Error(__filename + ': wrong config.$node type'); }
-	        if ( config.$body     && !(config.$body instanceof Element)    ) { throw new Error(__filename + ': wrong config.$body type'); }
-	        if ( config.parent    && !(config.parent instanceof Component) ) { throw new Error(__filename + ': wrong config.parent type'); }
-	        if ( config.children  && !Array.isArray(config.children)       ) { throw new Error(__filename + ': wrong config.children type'); }
+            if ( typeof config !== 'object' ) {
+                throw new Error(__filename + ': wrong config type');
+            }
+            // init parameters checks
+            if ( config.id && typeof config.id !== 'string' ) {
+                throw new Error(__filename + ': wrong or empty config.id');
+            }
+            if ( 'className' in config && (!config.className || typeof config.className !== 'string') ) {
+                throw new Error(__filename + ': wrong or empty config.className');
+            }
+            if ( config.$node && !(config.$node instanceof Element) ) {
+                throw new Error(__filename + ': wrong config.$node type');
+            }
+            if ( config.$body && !(config.$body instanceof Element) ) {
+                throw new Error(__filename + ': wrong config.$body type');
+            }
+            if ( config.parent && !(config.parent instanceof Component) ) {
+                throw new Error(__filename + ': wrong config.parent type');
+            }
+            if ( config.children && !Array.isArray(config.children) ) {
+                throw new Error(__filename + ': wrong config.children type');
+            }
 	    }
-	
+
 	    /**
 	     * Component visibility state flag.
 	     *
@@ -3791,21 +3809,21 @@
 	     * @type {boolean}
 	     */
 	    this.visible = true;
-	
+
 	    /**
 	     * Component can accept focus or not.
 	     *
 	     * @type {boolean}
 	     */
 	    this.focusable = true;
-	
+
 	    /**
 	     * DOM outer handle.
 	     *
 	     * @type {Element}
 	     */
 	    this.$node = null;
-	
+
 	    /**
 	     * DOM inner handle.
 	     * In simple cases is the same as $node.
@@ -3813,21 +3831,21 @@
 	     * @type {Element}
 	     */
 	    this.$body = null;
-	
+
 	    /**
 	     * Link to the parent component which has this component as a child.
 	     *
 	     * @type {Component}
 	     */
 	    this.parent = null;
-	
+
 	    /**
 	     * List of all children components.
 	     *
 	     * @type {Component[]}
 	     */
 	    this.children = [];
-	
+
 	    /**
 	     * allow to emit events to the parent component
 	     *
@@ -3835,77 +3853,77 @@
 	     * @type {boolean}
 	     */
 	    this.propagate = !!config.propagate;
-	
+
 	    // parent constructor call
 	    Emitter.call(this);
-	
+
 	    // outer handle - empty div in case nothing is given
 	    this.$node = config.$node || document.createElement('div');
-	
+
 	    // inner handle - the same as outer handler in case nothing is given
 	    this.$body = config.$body || this.$node;
-	
+
 	    // set CSS class names
 	    //this.$node.className += ' component ' + (config.className || '');
 	    this.$node.className = this.name + ' ' + (config.className || '');
-	
+
 	    // apply component id if given, generate otherwise
 	    this.id = config.id || this.$node.id || 'cid' + counter++;
-	
+
 	    // apply hierarchy
 	    if ( config.parent ) {
 	        // add to parent component
 	        config.parent.add(this);
 	    }
-	
+
 	    // apply given visibility
 	    if ( config.visible === false ) {
 	        // default state is visible
 	        this.hide();
 	    }
-	
+
 	    // apply focus handling method
 	    if ( config.focusable === false ) {
 	        // can't accept focus
 	        this.focusable = false;
 	    }
-	
+
 	    // a descendant defined own events
 	    if ( this.defaultEvents ) {
 	        // sanitize
 	        config.events = config.events || {};
-	
+
 	        if ( true ) {
 	            if ( typeof config.events !== 'object' ) { throw new Error(__filename + ': wrong config.events type'); }
 	            if ( typeof this.defaultEvents !== 'object' ) { throw new Error(__filename + ': wrong this.defaultEvents type'); }
 	        }
-	
+
 	        for ( name in this.defaultEvents ) {
 	            // overwrite default events with user-defined
 	            config.events[name] = config.events[name] || this.defaultEvents[name];
 	        }
 	    }
-	
+
 	    if ( config.events ) {
 	        // apply all given events
 	        Object.keys(config.events).forEach(function ( name ) {
 	            self.addListener(name, config.events[name]);
 	        });
 	    }
-	
+
 	    // apply the given children components
 	    if ( config.children ) {
 	        // apply
 	        this.add.apply(this, config.children);
 	    }
-	
+
 	    // component activation by mouse
 	    this.$node.addEventListener('click', function ( event ) {
 	        // left mouse button
 	        //if ( event.button === 0 ) {
 	        // activate if possible
 	        self.focus();
-	
+
 	        // there are some listeners
 	        if ( self.events['click'] ) {
 	            /**
@@ -3919,7 +3937,7 @@
 	            self.emit('click', event);
 	        }
 	        //}
-	
+
 	        if ( true ) {
 	            // middle mouse button
 	            if ( event.button === 1 ) {
@@ -3929,39 +3947,39 @@
 	                self.$node.classList.toggle('wired');
 	            }
 	        }
-	
+
 	        event.stopPropagation();
 	    });
-	
+
 	    if ( true ) {
 	        // expose inner ID to global scope
 	        window[self.id] = self.$node;
-	
+
 	        // expose a link
 	        this.$node.component = this.$body.component = this;
 	        this.$node.title = this.name + '#' + this.id + ' (outer)';
 	        this.$body.title = this.name + '#' + this.id + ' (inner)';
 	    }
-	
+
 	    debug.info('create component ' + this.name + '#' + this.id, null, {
 	        tags: ['create', 'component', this.name, this.id]
 	    });
 	}
-	
-	
+
+
 	// inheritance
 	Component.prototype = Object.create(Emitter.prototype);
 	Component.prototype.constructor = Component;
-	
-	
+
+
 	/**
 	 * List of all default event callbacks.
 	 *
 	 * @type {Object.<string, function>}
 	 */
 	Component.prototype.defaultEvents = null;
-	
-	
+
+
 	/**
 	 * Add a new component as a child.
 	 *
@@ -3977,28 +3995,28 @@
 	 */
 	Component.prototype.add = function ( child ) {
 	    var index;
-	
+
 	    // walk through all the given elements
 	    for ( index = 0; index < arguments.length; index++ ) {
 	        child = arguments[index];
-	
+
 	        if ( true ) {
 	            if ( !(child instanceof Component) ) { throw new Error(__filename + ': wrong child type'); }
 	        }
-	
+
 	        // apply
 	        this.children.push(child);
 	        child.parent = this;
-	
+
 	        // correct DOM parent/child connection if necessary
 	        if ( child.$node && child.$node.parentNode === null ) {
 	            this.$body.appendChild(child.$node);
 	        }
-	
+
 	        debug.info('add component ' + child.name + '#' + child.id + ' to ' + this.name + '#' + this.id, null, {
 	            tags: ['add', 'component', this.name, this.id, child.name, child.id]
 	        });
-	
+
 	        // there are some listeners
 	        if ( this.events['add'] ) {
 	            /**
@@ -4011,12 +4029,12 @@
 	             */
 	            this.emit('add', {item: child});
 	        }
-	
+
 	        //debug.log('component ' + this.name + '#' + this.id + ' new child: ' + child.name + '#' + child.id);
 	    }
 	};
-	
-	
+
+
 	/* @todo: consider activation in future */
 	///**
 	// * Insert component into the specific position.
@@ -4048,8 +4066,8 @@
 	//        child.parent = this;
 	//    }
 	//};
-	
-	
+
+
 	/**
 	 * Delete this component and clear all associated events.
 	 *
@@ -4061,7 +4079,7 @@
 	        if ( true ) {
 	            if ( !(this.parent instanceof Component) ) { throw new Error(__filename + ': wrong this.parent type'); }
 	        }
-	
+
 	        // active at the moment
 	        if ( app.activePage.activeComponent === this ) {
 	            this.blur();
@@ -4069,21 +4087,21 @@
 	        }
 	        this.parent.children.splice(this.parent.children.indexOf(this), 1);
 	    }
-	
+
 	    // remove all children
 	    this.children.forEach(function ( child ) {
 	        if ( true ) {
 	            if ( !(child instanceof Component) ) { throw new Error(__filename + ': wrong child type'); }
 	        }
-	
+
 	        child.remove();
 	    });
-	
+
 	    // remove all listeners
 	    this.events = {};
-	
+
 	    this.$node.parentNode.removeChild(this.$node);
-	
+
 	    // there are some listeners
 	    if ( this.events['remove'] ) {
 	        /**
@@ -4093,14 +4111,14 @@
 	         */
 	        this.emit('remove');
 	    }
-	
+
 	    //debug.log('component ' + this.name + '#' + this.id + ' remove', 'red');
 	    debug.info('remove component ' + this.name + '#' + this.id, null, {
 	        tags: ['remove', 'component', this.name, this.id]
 	    });
 	};
-	
-	
+
+
 	/**
 	 * Activate the component.
 	 * Notify the owner-page and apply CSS class.
@@ -4114,24 +4132,24 @@
 	Component.prototype.focus = function ( data ) {
 	    var activePage = app.activePage,
 	        activeItem = activePage.activeComponent;
-	
+
 	    // this is a visual component on a page
 	    // not already focused and can accept focus
 	    if ( this.focusable && this !== activeItem ) {
 	        // notify the current active component
 	        if ( activeItem ) { activeItem.blur(); }
-	
+
 	        /* eslint consistent-this: 0 */
-	
+
 	        // apply
 	        activePage.activeComponent = activeItem = this;
 	        activeItem.$node.classList.add('focus');
-	
+
 	        //debug.log('component ' + this.name + '#' + this.id + ' focus');
 	        debug.info('focus component ' + this.name + '#' + this.id, null, {
 	            tags: ['focus', 'component', this.name, this.id]
 	        });
-	
+
 	        // there are some listeners
 	        if ( activeItem.events['focus'] ) {
 	            /**
@@ -4141,15 +4159,15 @@
 	             */
 	            activeItem.emit('focus', data);
 	        }
-	
+
 	        return true;
 	    }
-	
+
 	    // nothing was done
 	    return false;
 	};
-	
-	
+
+
 	/**
 	 * Remove focus.
 	 * Change page.activeComponent and notify subscribers.
@@ -4161,19 +4179,19 @@
 	Component.prototype.blur = function () {
 	    var activePage = app.activePage,
 	        activeItem = activePage.activeComponent;
-	
+
 	    // apply visuals anyway
 	    this.$node.classList.remove('focus');
-	
+
 	    // this is the active component
 	    if ( this === activeItem ) {
 	        activePage.activeComponent = null;
-	
+
 	        //debug.log('component ' + this.name + '#' + this.id + ' blur', 'grey');
 	        debug.info('blur component ' + this.name + '#' + this.id, null, {
 	            tags: ['blur', 'component', this.name, this.id]
 	        });
-	
+
 	        // there are some listeners
 	        if ( this.events['blur'] ) {
 	            /**
@@ -4183,19 +4201,19 @@
 	             */
 	            this.emit('blur');
 	        }
-	
+
 	        return true;
 	    }
-	
+
 	    debug.warn('component ' + this.name + '#' + this.id + ' attempt to blur without link to a page', null, {
 	        tags: ['blur', 'component', this.name, this.id]
 	    });
-	
+
 	    // nothing was done
 	    return false;
 	};
-	
-	
+
+
 	/**
 	 * Make the component visible and notify subscribers.
 	 *
@@ -4212,11 +4230,11 @@
 	        this.$node.classList.remove('hidden');
 	        // flag
 	        this.visible = true;
-	
+
 	        debug.info('show component ' + this.name + '#' + this.id, null, {
 	            tags: ['show', 'component', this.name, this.id]
 	        });
-	
+
 	        // there are some listeners
 	        if ( this.events['show'] ) {
 	            /**
@@ -4226,15 +4244,15 @@
 	             */
 	            this.emit('show', data);
 	        }
-	
+
 	        return true;
 	    }
-	
+
 	    // nothing was done
 	    return true;
 	};
-	
-	
+
+
 	/**
 	 * Make the component hidden and notify subscribers.
 	 *
@@ -4249,11 +4267,11 @@
 	        this.$node.classList.add('hidden');
 	        // flag
 	        this.visible = false;
-	
+
 	        debug.info('hide component ' + this.name + '#' + this.id, null, {
 	            tags: ['hide', 'component', this.name, this.id]
 	        });
-	
+
 	        // there are some listeners
 	        if ( this.events['hide'] ) {
 	            /**
@@ -4263,18 +4281,18 @@
 	             */
 	            this.emit('hide');
 	        }
-	
+
 	        return true;
 	    }
-	
+
 	    // nothing was done
 	    return true;
 	};
-	
-	
+
+
 	// public
 	module.exports = Component;
-	
+
 	/* WEBPACK VAR INJECTION */}.call(exports, "../component/index.js"))
 
 /***/ },
@@ -4287,13 +4305,13 @@
 	/**
 	 * Main page implementation.
 	 */
-	
+
 	'use strict';
-	
+
 	var Page = __webpack_require__(/*! spa-component-page */ 18),
 	    page = new Page({$node: window.pageMain});
-	
-	
+
+
 	// public
 	module.exports = page;
 
