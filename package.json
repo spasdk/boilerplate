@@ -11,10 +11,11 @@
         "url": "https://github.com/spasdk/boilerplate.git"
     },
     "scripts": {
-        "start": "spasdk",
-        "build": "spasdk build",
-        "watch": "spasdk watch",
-        "serve": "spasdk serve",
+        "start": "runner -c tasks/develop.js",
+        "build": "runner -c tasks/develop.js build",
+        "watch": "runner -c tasks/develop.js watch",
+        "serve": "runner -c tasks/develop.js serve",
+        "repl": "runner -c tasks/develop.js repl",
         "lint": "eslint .",
         "test": "npm run lint"
     },
@@ -24,7 +25,9 @@
     },
     "devDependencies": {
         "eslint": "4.*.*",
-        "spa-eslint-config": "1.*.*"
+        "spa-eslint-config": "1.*.*",
+        "spa-tasks": "1.*.*",
+        "node-runner": "1.*.*"
     },
     "license": "MIT"
 }
