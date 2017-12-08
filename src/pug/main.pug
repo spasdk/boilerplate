@@ -1,9 +1,9 @@
 doctype html
 html
     head
-        title=package.name
+        title=boilerplate
         meta(charset="utf-8")
-        meta(name="description" content=package.description)
+        meta(name="description" content="Boilerplate for application creation.")
         link(rel="icon", type="image/png", href="img/favicon.png")
 
         if develop
@@ -16,5 +16,7 @@ html
             link(rel="stylesheet" href="css/release.app.css")
 
     body
-        include ./pages/init.jade
-        include ./pages/main.jade
+        include ./pages/init.pug
+        include ./pages/main.pug
+
+
