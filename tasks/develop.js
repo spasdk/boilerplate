@@ -7,6 +7,7 @@
 var path    = require('path'),
     extend  = require('extend'),
     runner  = require('node-runner'),
+    webpack = require('webpack'),
     source  = 'src',
     target  = path.join('build', 'develop');
 
@@ -16,11 +17,25 @@ require('spa-tasks');
 
 
 extend(true, runner.config, {
+    eslint: {
+        //options: {},
+        watch: [
+            'tasks/*.js',
+            path.join(source, 'js', '**', '*.js')
+        ]
+    },
+    livereload: {
+        watch: [
+            path.join(target, '**', '*'),
+            '!' + path.join(target, '**', '*.map')
+        ]
+    },
     pug: {
         source: path.join(source, 'pug', 'main.pug'),
         target: path.join(target, 'index.html'),
         variables: {
-            develop: true
+            develop: true,
+            package: require('../package')
         }
     },
     sass: {
@@ -44,18 +59,30 @@ extend(true, runner.config, {
                 'app:config': path.resolve(path.join(source, 'js', 'config.js'))
             }
         },
-        devtool: 'source-map'
+        devtool: 'source-map',
+        plugins: [
+            new webpack.DefinePlugin({
+                DEVELOP: true
+            })
+        ]
     }
 });
 
 
+runner.task('init', function () {
+    require('mkdirp').sync(target);
+});
+
 runner.task('build', runner.serial('pug:build', 'sass:build', 'webpack:build'));
 
+// eslint-disable-next-line no-unused-vars
 runner.task('watch', function ( done ) {
     //runner.watch(path.join(source, 'js', '**', '*.js'), 'webpack:build');
     runner.watch(path.join(source, 'pug', '**', '*.pug'), 'pug:build');
     runner.watch(path.join(source, 'sass', '**', '*.scss'), 'sass:build');
+    runner.run('eslint:watch');
     runner.run('webpack:watch');
+    runner.run('livereload:watch');
 });
 
 runner.task('serve', runner.parallel('static:start', 'repl:start'));
