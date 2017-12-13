@@ -1,5 +1,5 @@
 /**
- * Main SDK entry point.
+ * Runner tasks
  */
 
 'use strict';
@@ -7,27 +7,39 @@
 var path    = require('path'),
     extend  = require('extend'),
     runner  = require('node-runner'),
+    generators = require('spa-tasks'),
     source  = 'src',
     target  = path.join('build', 'develop');
 
+
+generators.eslint({
+    watch: [
+        path.join(source, 'js', '**', '*.js'),
+        path.join('tasks', '**', '*.js')
+    ]
+});
+
+generators.pug({
+    source: path.join(source, 'pug', 'main.pug'),
+    target: path.join(target, 'index.html'),
+    variables: {
+        develop: true
+    }
+});
+
+generators.repl({});
+
+generators.sass({
+    file: path.join(source, 'sass', 'main.scss'),
+    outFile: path.join(target, 'main.css'),
+    sourceMap: path.join(target, 'main.css.map')
+});
 
 // load default tasks
 require('spa-tasks');
 
 
 extend(true, runner.config, {
-    pug: {
-        source: path.join(source, 'pug', 'main.pug'),
-        target: path.join(target, 'index.html'),
-        variables: {
-            develop: true
-        }
-    },
-    sass: {
-        file: path.join(source, 'sass', 'main.scss'),
-        outFile: path.join(target, 'main.css'),
-        sourceMap: path.join(target, 'main.css.map')
-    },
     static: {
         open: path.join(target),
         port: 5000
@@ -51,6 +63,7 @@ extend(true, runner.config, {
 
 runner.task('build', runner.serial('pug:build', 'sass:build', 'webpack:build'));
 
+// eslint-disable-next-line no-unused-vars
 runner.task('watch', function ( done ) {
     //runner.watch(path.join(source, 'js', '**', '*.js'), 'webpack:build');
     runner.watch(path.join(source, 'pug', '**', '*.pug'), 'pug:build');
