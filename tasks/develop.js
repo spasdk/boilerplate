@@ -62,7 +62,10 @@ generators.webpack({
     devtool: 'source-map',
     plugins: [
         new webpack.DefinePlugin({
-            DEVELOP: true
+            DEVELOP: true,
+            LIVERELOAD: {
+                port: 35729
+            }
         })
     ]
 });
