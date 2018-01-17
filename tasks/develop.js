@@ -6,10 +6,19 @@
 
 var path    = require('path'),
     runner  = require('node-runner'),
+    tools   = require('node-runner/lib/tools'),
     webpack = require('webpack'),
     generators = require('spa-tasks'),
     source  = 'src',
     target  = path.join('build', 'develop');
+
+
+// activate popup notifications on errors
+require('node-runner/lib/notify');
+
+// add system task "status"
+// to get all tasks running state
+require('node-runner/lib/status');
 
 
 generators.eslint({
@@ -71,8 +80,10 @@ generators.webpack({
 });
 
 
-runner.task('init', function () {
-    require('mkdirp').sync(target);
+runner.task('init', function ( done ) {
+    tools.mkdir([target], runner.log.wrap('init'), function ( error ) {
+        done(error);
+    });
 });
 
 runner.task('build', runner.serial('pug:build', 'sass:build', 'webpack:build'));
