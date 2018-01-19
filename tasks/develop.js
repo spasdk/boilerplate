@@ -28,6 +28,13 @@ generators.eslint({
     ]
 });
 
+generators.gettext({
+    languages: ['ru'],
+    source: path.join(source, 'lang'),
+    target: path.join(target, 'lang'),
+    jsData: path.join(target, 'main.js')
+});
+
 generators.livereload({
     watch: [
         path.join(target, '**', '*'),
