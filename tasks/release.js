@@ -5,12 +5,15 @@
 'use strict';
 
 var path    = require('path'),
+    util    = require('util'),
     runner  = require('node-runner'),
     tools   = require('node-runner/lib/tools'),
     webpack = require('webpack'),
     tasks   = require('spa-tasks'),
+    pkgData = require(path.join(process.cwd(), 'package.json')),
+    wpkData = require(path.join(path.dirname(require.resolve('webpack')), '..', 'package.json')),
     source  = 'src',
-    target  = path.join('build', 'develop');
+    target  = path.join('build', 'release');
 
 
 // activate popup notifications on errors
@@ -35,18 +38,11 @@ tasks.gettext({
     jsData: path.join(target, 'main.js')
 });
 
-tasks.livereload({
-    watch: [
-        path.join(target, '**', '*'),
-        '!' + path.join(target, '**', '*.map')
-    ]
-});
-
 tasks.pug({
     source: path.join(source, 'pug', 'main.pug'),
     target: path.join(target, 'index.html'),
     variables: {
-        develop: true,
+        develop: false,
         package: require('../package')
     }
 });
@@ -54,8 +50,9 @@ tasks.pug({
 tasks.repl({});
 
 tasks.sass({
-    file: path.join(source, 'sass', 'develop.scss'),
+    file: path.join(source, 'sass', 'release.scss'),
     outFile: path.join(target, 'main.css'),
+    outputStyle: 'compressed',
     sourceMap: path.join(target, 'main.css.map')
 });
 
@@ -79,11 +76,33 @@ tasks.webpack({
     plugins: [
         // global constants
         new webpack.DefinePlugin({
-            DEVELOP: true,
-            LIVERELOAD: {
-                port: 35729
+            DEVELOP: false
+        }),
+        // obfuscation
+        new webpack.optimize.UglifyJsPlugin({
+            // this option prevents name changing
+            // use in case of strange errors
+            // mangle: false,
+            sourceMap: false,
+            output: {
+                comments: false
+            },
+            /* eslint camelcase: 0 */
+            compress: {
+                warnings: false,
+                unused: true,
+                dead_code: true,
+                drop_console: true,
+                drop_debugger: true,
+                properties: false,
+                pure_funcs: []
             }
-        })
+        }),
+        // add comment to the top of app.js
+        new webpack.BannerPlugin(util.format(
+            '%s v%s (webpack: v%s)',
+            pkgData.name, pkgData.version, wpkData.version
+        ))
     ]
 });
 
@@ -103,10 +122,9 @@ runner.task('watch', function ( done ) {
     runner.watch(path.join(source, 'sass', '**', '*.scss'), 'sass:build');
     runner.run('eslint:watch');
     runner.run('webpack:watch');
-    //runner.run('livereload:watch');
 });
 
-runner.task('serve', runner.parallel('static:start', 'livereload:start', 'repl:start'));
+runner.task('serve', runner.parallel('static:start', 'repl:start'));
 
 //runner.task('default', runner.serial('build', runner.parallel('watch', 'serve')));
 runner.task('default', runner.parallel('build', 'watch', 'serve'));
