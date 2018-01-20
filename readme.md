@@ -15,15 +15,42 @@ Create a new project base:
 git clone https://github.com/spasdk/boilerplate.git my-project
 ```
 
-Remove git metadata, build and start services:
+Remove git metadata and install dependencies:
 
 ```bash
 cd my-project
 rm -rf .git
-spasdk
-# or
-DEBUG=* spasdk
+npm install
 ```
+
+Execute npm scripts:
+
+```bash
+# init build structure
+npm run develop init
+
+# build everything
+npm run develop build
+
+# monitor all file changes and rebuild
+npm run develop watch
+
+# start static, livereload and repl services
+npm run develop serve
+
+# start only one service
+npm run develop repl:start
+
+# show all task with statuses
+npm run develop status
+
+# show task configuration
+npm run develop pug:config
+
+# and so on
+```
+
+The same commands are possible for release profile.
 
 
 ## Contribution ##

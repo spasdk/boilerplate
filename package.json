@@ -11,11 +11,8 @@
         "url": "https://github.com/spasdk/boilerplate.git"
     },
     "scripts": {
-        "start": "runner -c tasks/develop.js",
-        "build": "runner -c tasks/develop.js build",
-        "watch": "runner -c tasks/develop.js watch",
-        "serve": "runner -c tasks/develop.js serve",
-        "repl": "runner -c tasks/develop.js repl",
+        "develop": "runner -c tasks/develop.js",
+        "release": "runner -c tasks/release.js",
         "lint": "eslint .",
         "test": "npm run lint"
     },
