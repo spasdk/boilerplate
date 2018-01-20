@@ -8,7 +8,7 @@ var path    = require('path'),
     runner  = require('node-runner'),
     tools   = require('node-runner/lib/tools'),
     webpack = require('webpack'),
-    generators = require('spa-tasks'),
+    tasks   = require('spa-tasks'),
     source  = 'src',
     target  = path.join('build', 'develop');
 
@@ -21,28 +21,28 @@ require('node-runner/lib/notify');
 require('node-runner/lib/status');
 
 
-generators.eslint({
+tasks.eslint({
     watch: [
         path.join(source, 'js', '**', '*.js'),
         path.join('tasks', '**', '*.js')
     ]
 });
 
-generators.gettext({
+tasks.gettext({
     languages: ['ru'],
     source: path.join(source, 'lang'),
     target: path.join(target, 'lang'),
     jsData: path.join(target, 'main.js')
 });
 
-generators.livereload({
+tasks.livereload({
     watch: [
         path.join(target, '**', '*'),
         '!' + path.join(target, '**', '*.map')
     ]
 });
 
-generators.pug({
+tasks.pug({
     source: path.join(source, 'pug', 'main.pug'),
     target: path.join(target, 'index.html'),
     variables: {
@@ -51,19 +51,19 @@ generators.pug({
     }
 });
 
-generators.repl({});
+tasks.repl({});
 
-generators.sass({
+tasks.sass({
     file: path.join(source, 'sass', 'main.scss'),
     outFile: path.join(target, 'main.css'),
     sourceMap: path.join(target, 'main.css.map')
 });
 
-generators.static({
+tasks.static({
     open: path.join(target)
 });
 
-generators.webpack({
+tasks.webpack({
     entry: path.resolve(path.join(source, 'js', 'main.js')),
     output: {
         filename: 'main.js',
