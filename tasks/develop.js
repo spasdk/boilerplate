@@ -94,7 +94,7 @@ runner.task('init', function ( done ) {
     });
 });
 
-runner.task('build', runner.serial('pug:build', 'sass:build', 'webpack:build'));
+runner.task('build', runner.serial('pug:build', 'sass:build', 'webpack:build', 'gettext:build'));
 
 // eslint-disable-next-line no-unused-vars
 runner.task('watch', function ( done ) {
