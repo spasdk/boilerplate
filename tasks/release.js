@@ -83,7 +83,7 @@ tasks.webpack({
             // this option prevents name changing
             // use in case of strange errors
             // mangle: false,
-            sourceMap: false,
+            sourceMap: true,
             output: {
                 comments: false
             },
@@ -102,7 +102,8 @@ tasks.webpack({
         new webpack.BannerPlugin(util.format(
             '%s v%s (webpack: v%s)',
             pkgData.name, pkgData.version, wpkData.version
-        ))
+        )),
+        new webpack.optimize.OccurrenceOrderPlugin()
     ]
 });
 
@@ -127,4 +128,5 @@ runner.task('watch', function ( done ) {
 runner.task('serve', runner.parallel('static:start', 'repl:start'));
 
 //runner.task('default', runner.serial('build', runner.parallel('watch', 'serve')));
-runner.task('default', runner.parallel('build', 'watch', 'serve'));
+//runner.task('default', runner.parallel('build', 'watch', 'serve'));
+runner.task('default', runner.parallel('pug:build', 'sass:build', 'watch', 'serve'));

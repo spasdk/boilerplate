@@ -83,7 +83,8 @@ tasks.webpack({
             LIVERELOAD: {
                 port: 35729
             }
-        })
+        }),
+        new webpack.optimize.OccurrenceOrderPlugin()
     ]
 });
 
