@@ -1,132 +1,135 @@
 /**
- * Runner tasks
+ * Release tasks
  */
 
 'use strict';
 
-var path    = require('path'),
-    util    = require('util'),
-    runner  = require('node-runner'),
-    tools   = require('node-runner/lib/tools'),
-    webpack = require('webpack'),
-    tasks   = require('spa-tasks'),
-    pkgData = require(path.join(process.cwd(), 'package.json')),
-    wpkData = require(path.join(path.dirname(require.resolve('webpack')), '..', 'package.json')),
-    source  = 'src',
-    target  = path.join('build', 'release');
+var // system module
+    path     = require('path'),
+    // external dependencies
+    runner   = require('@runner/core'),
+    tools    = require('@runner/tools'),
+    logger   = require('@runner/logger'),
+    webpack  = require('webpack'),
+    UglifyJS = require('uglifyjs-webpack-plugin'),
+    // vars with values
+    source   = 'src',
+    target   = path.join('build', 'release');
 
-
-// activate popup notifications on errors
-require('node-runner/lib/notify');
 
 // add system task "status"
 // to get all tasks running state
-require('node-runner/lib/status');
+//require('node-runner/lib/status');
 
 
-tasks.eslint({
-    watch: [
-        path.join(source, 'js', '**', '*.js'),
-        path.join('tasks', '**', '*.js')
-    ]
-});
+Object.assign(runner.tasks,
+    // activate popup notifications on errors
+    require('@runner/generator-notify')(),
 
-tasks.gettext({
-    languages: ['ru'],
-    source: path.join(source, 'lang'),
-    target: path.join(target, 'lang'),
-    jsData: path.join(target, 'main.js')
-});
+    require('@runner/generator-eslint')({
+        watch: [
+            path.join(source, 'js', '**', '*.js'),
+            path.join('tasks', '**', '*.js')
+        ]
+    }),
 
-tasks.pug({
-    source: path.join(source, 'pug', 'main.pug'),
-    target: path.join(target, 'index.html'),
-    variables: {
-        develop: false,
-        package: require('../package')
-    }
-});
+    require('@runner/generator-gettext')({
+        languages: ['ru'],
+        source: path.join(source, 'lang'),
+        target: path.join(target, 'lang'),
+        jsData: path.join(target, 'main.js')
+    }),
 
-tasks.repl({});
+    require('@runner/generator-static')({
+        open: path.join(target)
+    }),
 
-tasks.sass({
-    file: path.join(source, 'sass', 'release.scss'),
-    outFile: path.join(target, 'main.css'),
-    outputStyle: 'compressed',
-    sourceMap: path.join(target, 'main.css.map')
-});
+    require('@runner/generator-repl')({
+        runner: runner
+    }),
 
-tasks.static({
-    open: path.join(target)
-});
-
-tasks.webpack({
-    entry: path.resolve(path.join(source, 'js', 'main.js')),
-    output: {
-        filename: 'main.js',
-        path: path.resolve(target),
-        sourceMapFilename: 'main.js.map'
-    },
-    resolve: {
-        alias: {
-            'app:config': path.resolve(path.join(source, 'js', 'config.js'))
+    require('@runner/generator-pug')({
+        source: path.join(source, 'pug', 'main.pug'),
+        target: path.join(target, 'index.html'),
+        variables: {
+            develop: false,
+            package: require('../package')
         }
-    },
-    devtool: 'source-map',
-    plugins: [
-        // global constants
-        new webpack.DefinePlugin({
-            DEVELOP: false
-        }),
-        // obfuscation
-        new webpack.optimize.UglifyJsPlugin({
-            // this option prevents name changing
-            // use in case of strange errors
-            // mangle: false,
-            sourceMap: true,
-            output: {
-                comments: false
-            },
-            /* eslint camelcase: 0 */
-            compress: {
-                warnings: false,
-                unused: true,
-                dead_code: true,
-                drop_console: true,
-                drop_debugger: true,
-                properties: false,
-                pure_funcs: []
+    }),
+
+    require('@runner/generator-sass')({
+        file: path.join(source, 'sass', 'release.scss'),
+        outFile: path.join(target, 'main.css'),
+        outputStyle: 'compressed',
+        sourceMap: path.join(target, 'main.css.map')
+    }),
+
+    require('@runner/generator-webpack')({
+        mode: 'production',
+        entry: path.resolve(path.join(source, 'js', 'main.js')),
+        output: {
+            filename: 'main.js',
+            path: path.resolve(target)
+        },
+        resolve: {
+            alias: {
+                'app:config': path.resolve(path.join(source, 'js', 'config.js'))
             }
-        }),
-        // add comment to the top of app.js
-        new webpack.BannerPlugin(util.format(
-            '%s v%s (webpack: v%s)',
-            pkgData.name, pkgData.version, wpkData.version
-        )),
-        new webpack.optimize.OccurrenceOrderPlugin()
-    ]
-});
+        },
+        optimization: {
+            minimize: true,
+            minimizer: [
+                new UglifyJS({
+                    uglifyOptions: {
+                        output: {
+                            comments: false
+                        },
+                        /* eslint camelcase: 0 */
+                        compress: {
+                            // display warnings when dropping unreachable code or unused declarations etc.
+                            warnings: false,
+                            unused: true,
+                            dead_code: true,
+                            drop_console: true,
+                            drop_debugger: true,
+                            properties: false
+                        }
+                    }
+                })
+            ]
+        },
+        plugins: [
+            // global constants
+            new webpack.DefinePlugin({
+                DEVELOP: false
+            }),
+            new webpack.optimize.OccurrenceOrderPlugin()
+        ]
+    })
+);
 
-
+// main tasks
 runner.task('init', function ( done ) {
-    tools.mkdir([target], runner.log.wrap('init'), function ( error ) {
-        done(error);
-    });
+    tools.mkdir([target], logger.wrap('init'), done);
 });
 
-runner.task('build', runner.serial('pug:build', 'sass:build', 'webpack:build'));
+runner.task('copy', function ( done ) {
+    tools.copy({
+        source: path.join(source, 'img'),
+        target: path.join(target, 'img')
+    }, logger.wrap('copy'), done);
+});
+
+runner.task('build', runner.serial('pug:build', 'sass:build', 'webpack:build', 'gettext:build', 'copy'));
 
 // eslint-disable-next-line no-unused-vars
 runner.task('watch', function ( done ) {
-    //runner.watch(path.join(source, 'js', '**', '*.js'), 'webpack:build');
     runner.watch(path.join(source, 'pug', '**', '*.pug'), 'pug:build');
     runner.watch(path.join(source, 'sass', '**', '*.scss'), 'sass:build');
     runner.run('eslint:watch');
     runner.run('webpack:watch');
 });
 
-runner.task('serve', runner.parallel('static:start', 'repl:start'));
+runner.task('serve', runner.parallel('static:start', 'repl:start', 'notify:start'));
 
-//runner.task('default', runner.serial('build', runner.parallel('watch', 'serve')));
-//runner.task('default', runner.parallel('build', 'watch', 'serve'));
-runner.task('default', runner.parallel('pug:build', 'sass:build', 'watch', 'serve'));
+runner.task('default', runner.serial('build', runner.parallel('watch', 'serve')));
