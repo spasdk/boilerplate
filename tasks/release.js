@@ -108,9 +108,16 @@ Object.assign(runner.tasks,
     })
 );
 
-
+// main tasks
 runner.task('init', function ( done ) {
     tools.mkdir([target], logger.wrap('init'), done);
+});
+
+runner.task('copy', function ( done ) {
+    tools.copy({
+        source: path.join(source, 'img'),
+        target: path.join(target, 'img')
+    }, logger.wrap('copy'), done);
 });
 
 runner.task('build', runner.serial('pug:build', 'sass:build', 'webpack:build', 'gettext:build'));
