@@ -21,6 +21,10 @@ Object.assign(runner.tasks,
     // activate popup notifications on errors
     require('@runner/generator-notify')(),
 
+    require('@runner/generator-repl')({
+        runner: runner
+    }),
+
     require('@runner/generator-eslint')({
         watch: [
             path.join(source, 'js', '**', '*.js'),
@@ -29,7 +33,8 @@ Object.assign(runner.tasks,
     }),
 
     require('@runner/generator-gettext')({
-        languages: ['ru'],
+        // add languages to translate
+        languages: [/*'fr'*/],
         source: path.join(source, 'lang'),
         target: path.join(target, 'lang'),
         jsData: [path.join(source, 'js')]
@@ -52,10 +57,6 @@ Object.assign(runner.tasks,
             develop: true,
             package: require('../package')
         }
-    }),
-
-    require('@runner/generator-repl')({
-        runner: runner
     }),
 
     require('@runner/generator-sass')({
@@ -115,7 +116,7 @@ runner.task('copy', function ( done ) {
     );
 });
 
-runner.task('build', runner.parallel('pug:build', 'sass:build', 'copy', runner.serial('webpack:build', 'gettext:build')));
+runner.task('build', runner.parallel('pug:build', 'sass:build', 'webpack:build', 'gettext:build', 'copy'));
 
 // eslint-disable-next-line no-unused-vars
 runner.task('watch', function ( done ) {
