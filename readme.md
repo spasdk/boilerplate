@@ -23,12 +23,34 @@ rm -rf .git
 npm install
 ```
 
-Execute npm scripts:
+Quick start:
 
 ```bash
-# init build structure
+# create project directory structure
+npm run init
+
+# build everything
+npm run build
+
+# build and start all develop tasks
+npm run start
+```
+
+### Development build ###
+
+Execute main tasks:
+
+```bash
+# create project directory structure
 npm run develop init
 
+# start to execute all tasks
+npm run develop
+```
+
+Execute individual tasks:
+
+```bash
 # build everything
 npm run develop build
 
@@ -41,17 +63,44 @@ npm run develop serve
 # start only one service
 npm run develop repl:start
 
-# show all task with statuses
-npm run develop status
-
 # show task configuration
 npm run develop pug:config
 
 # and so on
 ```
 
-The same commands are possible for release profile.
+### Release version ###
 
+Execute main tasks:
+
+```bash
+# create project directory structure
+npm run release init
+
+# start to execute all tasks
+npm run release
+```
+
+Execute individual tasks:
+
+```bash
+# build everything
+npm run release build
+
+# monitor all file changes and rebuild
+npm run release watch
+
+# start static and repl services
+npm run release serve
+
+# start only one service
+npm run release repl:start
+
+# show task configuration
+npm run release pug:config
+
+# and so on
+```
 
 ## Contribution ##
 

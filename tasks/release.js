@@ -22,6 +22,10 @@ Object.assign(runner.tasks,
     // activate popup notifications on errors
     require('@runner/generator-notify')(),
 
+    require('@runner/generator-repl')({
+        runner: runner
+    }),
+
     require('@runner/generator-eslint')({
         watch: [
             path.join(source, 'js', '**', '*.js'),
@@ -30,7 +34,8 @@ Object.assign(runner.tasks,
     }),
 
     require('@runner/generator-gettext')({
-        languages: ['ru'],
+        // add languages to translate
+        languages: [/*'fr'*/],
         source: path.join(source, 'lang'),
         target: path.join(target, 'lang'),
         jsData: [path.join(source, 'js')]
@@ -40,10 +45,6 @@ Object.assign(runner.tasks,
         open: path.join(target)
     }),
 
-    require('@runner/generator-repl')({
-        runner: runner
-    }),
-
     require('@runner/generator-pug')({
         source: path.join(source, 'pug', 'main.pug'),
         target: path.join(target, 'index.html'),
@@ -51,13 +52,6 @@ Object.assign(runner.tasks,
             develop: false,
             package: require('../package')
         }
-    }),
-
-    require('@runner/generator-sass')({
-        file: path.join(source, 'sass', 'release.scss'),
-        outFile: path.join(target, 'main.css'),
-        outputStyle: 'compressed',
-        sourceMap: path.join(target, 'main.css.map')
     }),
 
     require('@runner/generator-webpack')({
@@ -72,10 +66,14 @@ Object.assign(runner.tasks,
                 'app:config': path.resolve(path.join(source, 'js', 'config.js'))
             }
         },
+        // choose a developer tool to enhance debugging
+        // devtool: 'source-map',
         optimization: {
             minimize: true,
             minimizer: [
                 new UglifyJS({
+                    // set true to sourceMap to get correct map-file
+                    // sourceMap: true,
                     uglifyOptions: {
                         output: {
                             comments: false
@@ -88,7 +86,11 @@ Object.assign(runner.tasks,
                             dead_code: true,
                             drop_console: true,
                             drop_debugger: true,
-                            properties: false
+                            properties: false,
+                            pure_funcs: [
+                                'debug.assert', 'debug.log', 'debug.info', 'debug.warn', 'debug.fail', 'debug.inspect',
+                                'debug.event', 'debug.stub', 'debug.time', 'debug.timeEnd'
+                            ]
                         }
                     }
                 })
@@ -101,8 +103,16 @@ Object.assign(runner.tasks,
             }),
             new webpack.optimize.OccurrenceOrderPlugin()
         ]
+    }),
+
+    require('@runner/generator-sass')({
+        file: path.join(source, 'sass', 'release.scss'),
+        outFile: path.join(target, 'main.css'),
+        outputStyle: 'compressed',
+        sourceMap: path.join(target, 'main.css.map')
     })
 );
+
 
 // main tasks
 runner.task('init', function ( done ) {
@@ -120,7 +130,7 @@ runner.task('copy', function ( done ) {
     );
 });
 
-runner.task('build', runner.parallel('pug:build', 'sass:build', 'copy', runner.serial('webpack:build', 'gettext:build')));
+runner.task('build', runner.parallel('pug:build', 'sass:build', 'webpack:build', 'gettext:build', 'copy'));
 
 // eslint-disable-next-line no-unused-vars
 runner.task('watch', function ( done ) {

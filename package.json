@@ -13,13 +13,15 @@
     "scripts": {
         "develop": "runner -c tasks/develop.js",
         "release": "runner -c tasks/release.js",
+        "init": "npm run develop init && npm run release init",
         "build": "npm run develop build && npm run release build",
         "lint": "eslint .",
-        "test": "npm run lint"
+        "test": "npm run lint",
+        "start": "npm run develop"
     },
     "dependencies": {
-        "spa-app": "1.*.*",
-        "spa-component-page": "1.*.*"
+        "spa-app": "^1.5.0",
+        "spa-component-page": "^1.4.0"
     },
     "devDependencies": {
         "@runner/generator-eslint": "^1.0.1",
@@ -30,7 +32,7 @@
         "@runner/generator-repl": "^1.0.0",
         "@runner/generator-sass": "^1.0.0",
         "@runner/generator-static": "^1.0.1",
-        "@runner/generator-webpack": "^1.0.0",
+        "@runner/generator-webpack": "^1.0.1",
         "@runner/logger": "^1.0.0",
         "@runner/tools": "^1.2.0",
         "eslint": "^5.1.0",
