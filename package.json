@@ -25,7 +25,7 @@
     },
     "devDependencies": {
         "@runner/generator-eslint": "^1.0.1",
-        "@runner/generator-gettext": "^1.1.0",
+        "@runner/generator-gettext": "^1.2.0",
         "@runner/generator-livereload": "^1.1.0",
         "@runner/generator-notify": "^1.0.0",
         "@runner/generator-pug": "^1.0.0",
