@@ -17,7 +17,9 @@ var path    = require('path'),
 // to get all tasks running state
 //require('node-runner/lib/status');
 
-Object.assign(runner.tasks,
+Object.assign(
+    runner.tasks,
+
     // activate popup notifications on errors
     require('@runner/generator-notify')(),
 
