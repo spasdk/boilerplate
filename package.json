@@ -23,8 +23,7 @@
         "spa-component-page": "1.*.*"
     },
     "devDependencies": {
-        "eslint": "4.*.*",
-        "spa-eslint-config": "1.*.*"
+        "spa-eslint": "^1.0.0"
     },
     "license": "MIT"
 }
