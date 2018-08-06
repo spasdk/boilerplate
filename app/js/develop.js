@@ -85,7 +85,7 @@
 
 	/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	/* eslint no-path-concat: 0 */
@@ -597,7 +597,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(__filename) {/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	/* eslint no-path-concat: 0 */
@@ -757,7 +757,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(__filename) {/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	/* eslint no-path-concat: 0 */
@@ -1018,7 +1018,7 @@
 
 	/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	'use strict';
@@ -1094,7 +1094,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(__filename) {/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	/* eslint no-path-concat: 0 */
@@ -1442,7 +1442,7 @@
 
 	/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	'use strict';
@@ -1477,7 +1477,7 @@
 	 * Logger.
 	 *
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	/* eslint no-path-concat: 0 */
@@ -1781,7 +1781,7 @@
 
 	/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	'use strict';
@@ -1840,7 +1840,7 @@
 
 	/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	'use strict';
@@ -1953,7 +1953,7 @@
 
 	/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	'use strict';
@@ -2119,7 +2119,7 @@
 	 * Additional dev events.
 	 *
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	'use strict';
@@ -2320,7 +2320,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(__filename) {/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	/* eslint no-path-concat: 0 */
@@ -2365,7 +2365,7 @@
 	 * Static files reload on change.
 	 *
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	'use strict';
@@ -3615,7 +3615,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(__filename) {/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	/* eslint no-path-concat: 0 */
@@ -3719,7 +3719,7 @@
 
 	/* WEBPACK VAR INJECTION */(function(__filename) {/**
 	 * @license The MIT License (MIT)
-	 * @copyright Stanislav Kalashnik <darkpark.main@gmail.com>
+	 * @author Stanislav Kalashnik <darkpark.main@gmail.com>
 	 */
 
 	/* eslint no-path-concat: 0 */
