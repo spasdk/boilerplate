@@ -7,5 +7,5 @@
 // public
 module.exports = {
     // base rules
-    extends: require.resolve('@spasdk/eslint')
+    extends: require.resolve('spa-eslint')
 };
