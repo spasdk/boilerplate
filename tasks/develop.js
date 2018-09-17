@@ -6,8 +6,8 @@
 
 var path    = require('path'),
     runner  = require('runner'),
-    tools   = require('@runner/tools'),
-    logger  = require('@runner/logger'),
+    tools   = require('runner-tools'),
+    logger  = require('runner-logger'),
     webpack = require('webpack'),
     source  = 'src',
     target  = path.join('build', 'develop');
@@ -17,22 +17,24 @@ var path    = require('path'),
 // to get all tasks running state
 //require('node-runner/lib/status');
 
-Object.assign(runner.tasks,
-    // activate popup notifications on errors
-    require('@runner/generator-notify')(),
+Object.assign(
+    runner.tasks,
 
-    require('@runner/generator-repl')({
+    // activate popup notifications on errors
+    require('runner-generator-notify')(),
+
+    require('runner-generator-repl')({
         runner: runner
     }),
 
-    require('@runner/generator-eslint')({
+    require('runner-generator-eslint')({
         watch: [
             path.join(source, 'js', '**', '*.js'),
             path.join('tasks', '**', '*.js')
         ]
     }),
 
-    require('@runner/generator-gettext')({
+    require('runner-generator-gettext')({
         // add languages to translate
         languages: [/*'fr'*/],
         source: path.join(source, 'lang'),
@@ -40,14 +42,14 @@ Object.assign(runner.tasks,
         jsData: [path.join(source, 'js')]
     }),
 
-    require('@runner/generator-livereload')({
+    require('runner-generator-livereload')({
         watch: [
             path.join(target, '**', '*'),
             '!' + path.join(target, '**', '*.map')
         ]
     }),
 
-    require('@runner/generator-pug')({
+    require('runner-generator-pug')({
         source: path.join(source, 'pug', 'main.pug'),
         target: path.join(target, 'index.html'),
         options: {
@@ -59,17 +61,17 @@ Object.assign(runner.tasks,
         }
     }),
 
-    require('@runner/generator-sass')({
+    require('runner-generator-sass')({
         file: path.join(source, 'sass', 'develop.scss'),
         outFile: path.join(target, 'main.css'),
         sourceMap: path.join(target, 'main.css.map')
     }),
 
-    require('@runner/generator-static')({
+    require('runner-generator-static')({
         open: path.join(target)
     }),
 
-    require('@runner/generator-webpack')({
+    require('runner-generator-webpack')({
         mode: 'development',
         entry: path.resolve(path.join(source, 'js', 'main.js')),
         output: {
