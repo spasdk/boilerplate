@@ -20,11 +20,11 @@
         "start": "npm run develop"
     },
     "dependencies": {
-        "spa-app": "^1.5.1",
-        "spa-component-page": "^1.4.0"
+        "spa-app": "^1.5.2",
+        "spa-component-page": "^1.4.1"
     },
     "devDependencies": {
-        "spa-eslint": "^1.0.0",
+        "runner": "^2.0.1",
         "runner-generator-eslint": "^1.0.2",
         "runner-generator-gettext": "^1.2.1",
         "runner-generator-livereload": "^1.1.1",
@@ -36,8 +36,8 @@
         "runner-generator-webpack": "^1.0.2",
         "runner-logger": "^1.0.1",
         "runner-tools": "^1.2.1",
-        "runner": "^2.0.1",
-        "uglifyjs-webpack-plugin": "^1.2.7"
+        "spa-eslint": "^1.0.1",
+        "uglifyjs-webpack-plugin": "^2.0.0"
     },
     "license": "MIT"
 }
