@@ -124,7 +124,7 @@ Object.assign(
                     use: {
                         loader: 'babel-loader?cacheDirectory',
                         options: {
-                            presets: [['@babel/preset-env', {loose: true}]],
+                            presets: [['@babel/preset-env', {loose: true, modules: 'commonjs'}]],
                             plugins: [
                                 '@babel/plugin-transform-runtime',
                                 ['@babel/plugin-transform-react-jsx', {pragma: 'jsxDomTag'}]
