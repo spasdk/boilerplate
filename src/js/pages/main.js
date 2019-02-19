@@ -4,9 +4,21 @@
 
 'use strict';
 
-var Page = require('spa-component-page'),
-    page = new Page({$node: document.getElementById('pageMain')});
+const
+    Component = require('../lib/component');
 
+var page = new Component({
+    name: 'page',
+    modifiers: ['main']
+});
+
+
+page.$node.textContent = 'main page';
+
+
+if ( DEVELOP ) {
+    window.pageMain = page;
+}
 
 // public
 module.exports = page;

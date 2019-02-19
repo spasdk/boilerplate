@@ -7,5 +7,16 @@
 // public
 module.exports = {
     // base rules
-    extends: require.resolve('spa-eslint')
+    extends: require.resolve('spa-eslint'),
+
+    env: {
+        es6: true
+    },
+
+    globals: {
+        _: false,
+        LIVERELOAD_PORT: false
+    },
+
+    rules: {}
 };

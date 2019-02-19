@@ -36,7 +36,7 @@ Object.assign(
 
     require('runner-generator-gettext')({
         // add languages to translate
-        languages: [/*'fr'*/],
+        languages: ['ru'],
         source: path.join(source, 'lang'),
         target: path.join(target, 'lang'),
         jsData: [path.join(source, 'js')]
@@ -73,7 +73,7 @@ Object.assign(
 
     require('runner-generator-webpack')({
         mode: 'development',
-        entry: path.resolve(path.join(source, 'js', 'main.js')),
+        entry: path.resolve(path.join(source, 'js', 'develop.js')),
         output: {
             filename: 'main.js',
             path: path.resolve(target)
@@ -82,22 +82,38 @@ Object.assign(
             // delay rebuilding after the first change (in ms)
             aggregateTimeout: 50
         },
-        resolve: {
+        /*resolve: {
             alias: {
                 'app:config': path.resolve(path.join(source, 'js', 'config.js'))
             }
-        },
+        },*/
         devtool: 'source-map',
         plugins: [
             // global constants
             new webpack.DefinePlugin({
                 DEVELOP: true,
-                LIVERELOAD: {
-                    port: 35729
-                }
+                LIVERELOAD_PORT: 35729
             }),
             new webpack.optimize.OccurrenceOrderPlugin()
-        ]
+        ],
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    exclude: /node_modules/,
+                    use: {
+                        loader: 'babel-loader?cacheDirectory',
+                        options: {
+                            presets: [['@babel/preset-env', {loose: true}]],
+                            plugins: [
+                                '@babel/plugin-transform-runtime',
+                                ['@babel/plugin-transform-react-jsx', {pragma: 'jsxDomTag'}]
+                            ]
+                        }
+                    }
+                }
+            ]
+        }
     })
 );
 
