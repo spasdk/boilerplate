@@ -401,7 +401,7 @@ function Component ( config ) {
     // }
 
     // component activation by mouse
-    $node.addEventListener('!click', function ( event ) {
+    $node.addEventListener('click', function ( event ) {
         event.stopPropagation();
 
         if ( DEVELOP ) {
