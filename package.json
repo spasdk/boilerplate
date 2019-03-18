@@ -26,11 +26,11 @@
         "spa-gettext": "^1.4.1"
     },
     "devDependencies": {
-        "@babel/core": "^7.3.3",
-        "@babel/plugin-transform-runtime": "^7.2.0",
+        "@babel/core": "^7.3.4",
         "@babel/plugin-transform-react-jsx": "^7.3.0",
-        "@babel/preset-env": "^7.3.1",
-        "@babel/runtime": "^7.3.1",
+        "@babel/plugin-transform-runtime": "^7.3.4",
+        "@babel/preset-env": "^7.3.4",
+        "@babel/runtime": "^7.3.4",
         "babel-loader": "^8.0.5",
         "runner": "^2.0.1",
         "runner-generator-eslint": "^1.0.2",
@@ -41,11 +41,11 @@
         "runner-generator-repl": "^1.0.2",
         "runner-generator-sass": "^1.0.1",
         "runner-generator-static": "^1.1.0",
-        "runner-generator-webpack": "^1.0.2",
+        "runner-generator-webpack": "^1.1.0",
         "runner-logger": "^1.0.1",
         "runner-tools": "^1.2.1",
         "spa-eslint": "^1.0.1",
-        "terser-webpack-plugin": "^1.2.2"
+        "terser-webpack-plugin": "^1.2.3"
     },
     "license": "MIT"
 }
