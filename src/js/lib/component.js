@@ -130,7 +130,7 @@ function Component ( config ) {
 
     // append all new classes to the existing ones
     //$node.classList.add.apply($node.classList, classList);
-    $node.className += classList.join(' ');
+    $node.className = ($node.className ? $node.className + ' ' : '') + classList.join(' ');
 
     config.focusable && (this.focusable = true);
 
@@ -441,12 +441,12 @@ function Component ( config ) {
              * @type {Object}
              * @property {Event} event click event data
              */
-            self.events['click']  && self.emit('click', event);
+            self.events.click  && self.emit('click', event);
 
             //console.log('event.defaultPrevented', event.defaultPrevented);
 
             // apply focus if not canceled
-            !event.defaultPrevented && self.focus();
+            !event.defaultPrevented && self.private.focusable && $node.focus();
         }
     });
 
