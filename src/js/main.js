@@ -13,7 +13,8 @@ const
 
 // load localization
 gettext.load({name: app.config.language}, function () {
-    var pages  = {},
+    const
+        pages  = {},
         tabSet = new TabSet({
             $node: document.body,
             content: [
@@ -26,35 +27,9 @@ gettext.load({name: app.config.language}, function () {
         tabSet.current = pages.main;
     });
 
-    //pages.init.fill();
     tabSet.current = pages.init;
 
     router.on('main', function () {
         console.log('router: main');
     });
-
-    // document.body.append(
-    //     app.pages.init.$node,
-    //     app.pages.main.$node
-    // );
 });
-
-
-// // DOM is ready
-// app.once('dom', function () {
-//     // load pages
-//     app.pages = {
-//         init: require('./pages/init'),
-//         main: require('./pages/main')
-//     };
-//
-//     // show splash screen
-//     app.route(app.pages.init);
-// });
-//
-//
-// // everything is ready
-// app.once('load', function () {
-//     // show main page
-//     app.route(app.pages.main);
-// });

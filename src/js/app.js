@@ -4,9 +4,9 @@
 
 'use strict';
 
-const Emitter = require('cjs-emitter');
-
-var app = new Emitter();
+const
+    Emitter = require('cjs-emitter'),
+    app     = new Emitter();
 
 
 // load global app configuration

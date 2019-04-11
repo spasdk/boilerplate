@@ -7,6 +7,9 @@
 // main entry
 require('./main');
 
+// expose main object
+window.app = require('./app');
+
 // setup
 window.LiveReloadOptions = {
     host: location.hostname,
