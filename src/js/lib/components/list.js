@@ -146,9 +146,10 @@ function List ( config ) {
     config.render && (this.render = config.render);
 
     // apply and render
-    this.data = config.data;
+    config.data && (this.data = config.data);
 
-    $node.addEventListener('click', function ( event ) {
+    //$node.addEventListener('click', function ( event ) {
+    this.addListener('click', function ( event ) {
         var $item = event.target;
 
         // find the top item
@@ -160,7 +161,7 @@ function List ( config ) {
         //console.log(Array.prototype.indexOf.call($item.parentNode.children, $item));
 
         // notify listeners
-        self.events.click && self.emit('click', /*data[$item.dataset.index],*/ event);
+        //self.events.click && self.emit('click', /*data[$item.dataset.index],*/ event);
 
         // listeners can cancel focusing
         if ( !event.defaultPrevented ) {
@@ -236,7 +237,7 @@ List.prototype.name = 'list';
 //List.prototype.CLASS_ITEM_FOCUSED = List.prototype.CLASS_ITEM + ' ' + List.prototype.CLASS_ITEM + '--focused';
 
 
-Object.defineProperties(Component.prototype, {
+Object.defineProperties(List.prototype, {
     data: {
         get: function () {
             return this.private.data;
@@ -296,6 +297,12 @@ Object.defineProperties(Component.prototype, {
 
             // valid focus candidate or null to clear focus
             if ( ($value && $value.parentNode === this.$node) || !$value ) {
+                // not clearing
+                if ( $value ) {
+                    // notify listeners
+                    this.events['click:item'] && this.emit('click:item', internals.data[focusIndex], $focusItem, focusIndex);
+                }
+
                 // nothing has changed
                 if ( $value === $focusItem ) {
                     console.warn('$focusItem: current and new values are identical', $value, this);

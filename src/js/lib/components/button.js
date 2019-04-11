@@ -5,7 +5,8 @@
 
 'use strict';
 
-var Component = require('../component');
+const
+    Component = require('../component');
 
 
 /**
@@ -18,7 +19,7 @@ var Component = require('../component');
  * @extends Component
  *
  * @param {Object} [config={}] - init parameters (all inherited from the parent)
- * @param {string} [config.value] - button caption text (generated if not set)
+ * @param {string} [config.title] - button caption text (generated if not set)
  * @param {string} [config.icon] - button icon name
  *
  * @example
@@ -27,22 +28,22 @@ var Component = require('../component');
  *
  * btnSimple = new Button({
  *     $node: document.getElementById('btnSimple'),
- *     value: 'Simple button'
+ *     title: 'Simple button'
  * });
  *
  * btnIcon = new Button({
  *     $node: document.getElementById('btnIcon'),
  *     icon: 'menu'
- *     value: 'Button with icon'
+ *     title: 'Button with icon'
  * });
  *
  * btnDetached = new Button({
- *     value: 'Button not added to the page',
+ *     title: 'Button not added to the page',
  *     className: 'wide'
  * });
  */
 function Button ( config ) {
-    var self = this;
+    //const self = this;
 
     console.assert(typeof this === 'object', 'must be constructed via new');
     console.assert(typeof config === 'object', 'wrong config type');
@@ -73,11 +74,11 @@ function Button ( config ) {
         this.$node.textContent = config.title;
     }
 
-    this.$node.addEventListener('click', function ( event ) {
-        console.log('button node click', event);
-
-        self.events.click && self.emit('click', event);
-    });
+    // this.$node.addEventListener('click', function ( event ) {
+    //     console.log('button node click', event);
+    //
+    //     self.events.click && self.emit('click', event);
+    // });
 
     // if ( DEVELOP ) {
     //     window.ComponentButton = Button;
