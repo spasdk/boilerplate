@@ -95,7 +95,7 @@ function Component ( config ) {
     Emitter.call(this);
 
     /** @protected */
-    this.private = {
+    this.internals = {
         hidden: false,
         focusable: false,
         focused: false
@@ -154,7 +154,7 @@ function Component ( config ) {
         // add handlers
         $node.addEventListener('focus', function ( event ) {
             $node.classList.add(self.name + '--focused');
-            self.private.focused = true;
+            self.internals.focused = true;
 
             if ( DEVELOP ) {
                 $node.classList.add('develop-focused');
@@ -167,7 +167,7 @@ function Component ( config ) {
             //console.log(self, event);
 
             $node.classList.remove(self.name + '--focused');
-            self.private.focused = false;
+            self.internals.focused = false;
 
             if ( DEVELOP ) {
                 $node.classList.remove('develop-focused');
@@ -446,7 +446,7 @@ function Component ( config ) {
             //console.log('event.defaultPrevented', event.defaultPrevented);
 
             // apply focus if not canceled
-            !event.defaultPrevented && self.private.focusable && $node.focus();
+            !event.defaultPrevented && self.internals.focusable && $node.focus();
         }
     });
 
@@ -509,7 +509,7 @@ Component.prototype.constructor = Component;
 Object.defineProperties(Component.prototype, {
     focusable: {
         get: function () {
-            return this.private.focusable;
+            return this.internals.focusable;
         },
         set: function ( value ) {
             var self      = this,
@@ -520,11 +520,11 @@ Object.defineProperties(Component.prototype, {
             value = !!value;
 
             // nothing has changed
-            if ( this.private.focusable === value ) {
+            if ( this.internals.focusable === value ) {
                 console.warn('focusable: current and new values are identical', value, this);
             } else {
                 // save
-                this.private.focusable = value;
+                this.internals.focusable = value;
 
                 // apply
                 if ( value ) {
@@ -532,14 +532,14 @@ Object.defineProperties(Component.prototype, {
                     $node.setAttribute('tabIndex', '0');
 
                     // prepare focus handlers
-                    this.private.onfocus = function onFocus ( event ) {
+                    this.internals.onfocus = function onFocus ( event ) {
                         // apply
                         $node.classList.add(nodeClass);
                         DEVELOP && $node.classList.add('develop-focused');
                         // notify listeners
                         self.events.focus && self.emit('focus', event);
                     };
-                    this.private.onblur = function onFocus ( event ) {
+                    this.internals.onblur = function onFocus ( event ) {
                         // apply
                         $node.classList.remove(nodeClass);
                         DEVELOP && $node.classList.remove('develop-focused');
@@ -548,19 +548,19 @@ Object.defineProperties(Component.prototype, {
                     };
 
                     // add handlers
-                    $node.addEventListener('focus', this.private.onfocus);
-                    $node.addEventListener('blur', this.private.onblur);
+                    $node.addEventListener('focus', this.internals.onfocus);
+                    $node.addEventListener('blur', this.internals.onblur);
                 } else {
                     // does not have focus
                     $node.removeAttribute('tabIndex');
 
                     // remove handlers
-                    $node.removeEventListener('focus', this.private.onfocus);
-                    $node.removeEventListener('blur', this.private.onblur);
+                    $node.removeEventListener('focus', this.internals.onfocus);
+                    $node.removeEventListener('blur', this.internals.onblur);
 
                     // clear
-                    delete this.private.onfocus;
-                    delete this.private.onblur;
+                    delete this.internals.onfocus;
+                    delete this.internals.onblur;
 
                     // blur just in case
                     this.focused = false;
@@ -571,7 +571,7 @@ Object.defineProperties(Component.prototype, {
 
     focused: {
         get: function () {
-            return this.private.focused;
+            return this.internals.focused;
         },
         set: function ( value ) {
             // apply
@@ -589,7 +589,7 @@ Object.defineProperties(Component.prototype, {
 
     hidden: {
         get: function () {
-            return this.private.hidden;
+            return this.internals.hidden;
         },
         set: function ( value ) {
             var $node     = this.$node,
@@ -599,11 +599,11 @@ Object.defineProperties(Component.prototype, {
             value = !!value;
 
             // nothing has changed
-            if ( this.private.hidden === value ) {
+            if ( this.internals.hidden === value ) {
                 console.warn('hidden: current and new values are identical', value, this);
             } else {
                 // save
-                this.private.hidden = value;
+                this.internals.hidden = value;
 
                 // apply
                 if ( value ) {
@@ -623,7 +623,7 @@ Object.defineProperties(Component.prototype, {
     /*,
     data: {
         get: function () {
-            return this.private.data;
+            return this.internals.data;
         },
         set: function ( value ) {
             this.render(this.$node, value);
@@ -634,7 +634,7 @@ Object.defineProperties(Component.prototype, {
 
 /*Component.prototype.init = function ( data ) {
     // store
-    this.private.data = data;
+    this.internals.data = data;
 
     // build
     this.render(this.$node, data);
@@ -648,7 +648,7 @@ Object.defineProperties(Component.prototype, {
  */
 /*Component.prototype.render = function ( $node, data ) {
     // // store
-    // this.private.data = data;
+    // this.internals.data = data;
     //
     // // build
     // $node.textContent = data;
@@ -896,11 +896,11 @@ Component.prototype.remove = function () {
  * //@fires module:stb/component~Component#show
  */
 /*Component.prototype.show = function () {
-    if ( this.private.hidden ) {
+    if ( this.internals.hidden ) {
         // correct style
         this.$node.classList.remove(this.name + '--hidden');
         // flag
-        this.private.hidden = false;
+        this.internals.hidden = false;
         // notify listeners
         this.events.show && this.emit('show');
 
@@ -925,11 +925,11 @@ Component.prototype.remove = function () {
  * //@fires module:stb/component~Component#hide
  */
 /*Component.prototype.hide = function () {
-    if ( !this.private.hidden ) {
+    if ( !this.internals.hidden ) {
         // correct style
         this.$node.classList.add(this.name + '--hidden');
         // flag
-        this.private.hidden = true;
+        this.internals.hidden = true;
         // notify listeners
         this.events.hide && this.emit('hide');
 

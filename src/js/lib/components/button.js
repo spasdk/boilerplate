@@ -96,7 +96,7 @@ Button.prototype.name = 'button';
 
 /*Button.prototype.render = function ( $node, data ) {
     // store
-    this.private.data = data;
+    this.internals.data = data;
 
     // build
     $node.textContent = data.title;

@@ -240,12 +240,12 @@ List.prototype.name = 'list';
 Object.defineProperties(List.prototype, {
     data: {
         get: function () {
-            return this.private.data;
+            return this.internals.data;
         },
         set: function ( data ) {
             var $node     = this.$node,
                 $fragment = document.createDocumentFragment(),
-                internals = this.private;
+                internals = this.internals;
 
             // sanitize
             data = data || [];
@@ -287,10 +287,10 @@ Object.defineProperties(List.prototype, {
 
     $focusItem: {
         get: function () {
-            return this.private.$focusItem;
+            return this.internals.$focusItem;
         },
         set: function ( $value ) {
-            var internals  = this.private,
+            var internals  = this.internals,
                 $focusItem = internals.$focusItem,
                 focusIndex = internals.focusIndex,
                 itemClass  = this.name + '__item--focused';
@@ -335,10 +335,10 @@ Object.defineProperties(List.prototype, {
 
     focusIndex: {
         get: function () {
-            return this.private.focusIndex;
+            return this.internals.focusIndex;
         },
         set: function ( value ) {
-            var internals = this.private,
+            var internals = this.internals,
                 $target;
 
             if ( value === null || value === undefined ) {
@@ -377,11 +377,11 @@ Object.defineProperties(List.prototype, {
 List.prototype.render = function ( $item, data ) {
     $item.textContent = data;
 
-    // var //private = this.private,
+    // var //internals = this.internals,
     //     $fragment = document.createDocumentFragment();
     //
     // // sanitize
-    // this.private.data = data = data || [];
+    // this.internals.data = data = data || [];
     //
     // // valid input
     // if ( Array.isArray(data) ) {
@@ -394,7 +394,7 @@ List.prototype.render = function ( $item, data ) {
     //     }
     //
     //     // reset focus states
-    //     this.private.focusIndex = this.private.$focusItem = undefined;
+    //     this.internals.focusIndex = this.internals.$focusItem = undefined;
     //
     //     // create items
     //     data.forEach(function ( dataItem, index ) {

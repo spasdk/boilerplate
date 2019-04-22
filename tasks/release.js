@@ -4,14 +4,16 @@
 
 'use strict';
 
-var path     = require('path'),
-    runner   = require('runner'),
-    tools    = require('runner-tools'),
-    logger   = require('runner-logger'),
-    webpack  = require('webpack'),
-    Terser   = require('terser-webpack-plugin'),
-    source   = 'src',
-    target   = path.join('build', 'release');
+const
+    fs      = require('fs'),
+    path    = require('path'),
+    runner  = require('runner'),
+    tools   = require('runner-tools'),
+    logger  = require('runner-logger'),
+    webpack = require('webpack'),
+    Terser  = require('terser-webpack-plugin'),
+    source  = 'src',
+    target  = path.join('build', 'release');
 
 
 // add system task "status"

@@ -119,7 +119,7 @@ Page.prototype.name = 'page';
 /*Object.defineProperties(Page.prototype, {
     hidden: {
         get: function () {
-            return this.private.hidden;
+            return this.internals.hidden;
         },
         set: function ( value ) {
             // hide the visible page
@@ -130,7 +130,7 @@ Page.prototype.name = 'page';
 
             // show the hidden page
             if ( !value && visiblePage !== this ) {
-                if ( this.private.hidden ) {
+                if ( this.internals.hidden ) {
                     // hide previous page
                     visiblePage && (visiblePage.hidden = true);
 
@@ -150,7 +150,7 @@ Page.prototype.name = 'page';
 
             // apply visibility
             //Component.prototype.hidden = value;
-            this.private.component.hidden = value;
+            this.internals.component.hidden = value;
         }
     }
 });*/

@@ -12,7 +12,7 @@ function TabSet ( config ) {
     // parent constructor call
     Component.call(this, config);
 
-    this.private.current = null;
+    this.internals.current = null;
 }
 
 
@@ -27,10 +27,10 @@ TabSet.prototype.name = 'tab-set';
 Object.defineProperties(TabSet.prototype, {
     current: {
         get: function () {
-            return this.private.current;
+            return this.internals.current;
         },
         set: function ( current ) {
-            var previous = this.private.current;
+            var previous = this.internals.current;
 
             // nothing has changed
             if ( current === previous ) {
@@ -40,7 +40,7 @@ Object.defineProperties(TabSet.prototype, {
                 previous && (previous.hidden = true);
 
                 // show new
-                this.private.current = current;
+                this.internals.current = current;
                 current.hidden = false;
 
                 // notify listeners

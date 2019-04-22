@@ -4,7 +4,9 @@
 
 'use strict';
 
-var path    = require('path'),
+const
+    fs      = require('fs'),
+    path    = require('path'),
     runner  = require('runner'),
     tools   = require('runner-tools'),
     logger  = require('runner-logger'),
