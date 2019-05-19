@@ -402,7 +402,7 @@ function Component ( config ) {
 
     // component activation by mouse
     $node.addEventListener('click', function ( event ) {
-        event.stopPropagation();
+        //event.stopPropagation();
 
         if ( DEVELOP ) {
             if ( event.ctrlKey ) {
@@ -432,7 +432,7 @@ function Component ( config ) {
 
         //console.log('DOM event');
         // left mouse button
-        if ( event.button === 0 && !self.disabled ) {
+        if ( event.button === 0 ) {
             /**
              * Mouse click event.
              *
@@ -441,7 +441,7 @@ function Component ( config ) {
              * @type {Object}
              * @property {Event} event click event data
              */
-            self.events.click  && self.emit('click', event);
+            self.events.click && self.emit('click', event);
 
             //console.log('event.defaultPrevented', event.defaultPrevented);
 
