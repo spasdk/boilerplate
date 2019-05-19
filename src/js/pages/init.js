@@ -105,7 +105,18 @@ var buttonSubmit = new Button({
             }
         },
         render: function ( $item, data ) {
-            $item.textContent = data.title;
+            //$item.textContent = data.title;
+            const button = new Button({
+                title: data.title,
+                events: {
+                    click: event => {
+                        console.log('button click');
+                        event.stopPropagation();
+                    }
+                }
+            });
+
+            $item.appendChild(button.$node);
         }
     }),
 
